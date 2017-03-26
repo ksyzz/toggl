@@ -2,40 +2,65 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>SpringMVC Demo 首页</title>
-
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <title>toggl</title>
+    <%--bootstrap 配置--%>
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <%--ajax--%>
+    <script type="text/javascript">
+        function timer()
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    var result = xmlhttp.responseText;
+                    var jstr = JSON.parse(result);
+                    document.getElementById("transaction").innerHTML=jstr.tagName;
+                }
+            }
+            xmlhttp.open("GET","/tag/get/all",true);
+            xmlhttp.send();
+        }
+    </script>
 </head>
 <body>
-<h1>这里是SpringMVC Demo首页</h1>
-
-<h3>出现此页面，说明配置成功。</h3>
 <div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <h3>
-                h3. 这是一套可视化布局系统.
-            </h3>
-            <form>
-                <fieldset>
-                    <legend>表单项</legend> <label>表签名</label><input type="text" /> <span class="help-block">这里填写帮助信息.</span> <label class="checkbox"><input type="checkbox" /> 勾选同意</label> <button type="submit" class="btn">提交</button>
-                </fieldset>
-            </form>
-        </div>
-    </div>
+    <h1 style="text-align: center;color: blue; background-color: cornsilk">Welcome to your time manager</h1>
 </div>
+<hr style="height:3px;border:none;border-top:3px groove deepskyblue;" />
+<form action="/item/add" method="post">
+    <input type="text" name="content" placeholder="What are you working on?" style="width: 60%; border: none; height: 50px; font-size: 20px"/>
+
+</form>
+
+    <%--<div class="container-fluid">--%>
+    <%--<div class="row">--%>
+        <%--<div class="span2  col-xs-12 col-sm-3 col-md-2" >--%>
+            <%--<ul class="nav nav-pills nav-stacked">--%>
+                <%--<li class="active"><a href="pages/test.jsp">Timer</a></li>--%>
+                <%--<li><a href="" onclick="timer()">Graph</a></li>--%>
+            <%--</ul>--%>
+            <%--<button onclick="timer()"/>--%>
+        <%--</div>--%>
+        <%--<div class="col-xs-12 col-sm-9 col-md-10" id="transaction">--%>
+
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 

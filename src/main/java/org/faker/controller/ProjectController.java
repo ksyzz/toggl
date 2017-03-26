@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class ProjectController {
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
     public ProjectInfo addProject(
             @RequestParam("projectName") String projectName
     ){
@@ -41,6 +43,7 @@ public class ProjectController {
      * @return
      */
     @RequestMapping(value = "/get/all", method = RequestMethod.GET)
+    @ResponseBody
     public List<ProjectInfo> getAllProjects(){
         List<Project> projects = projectService.getAllProjects();
         return projects.stream().map(ProjectInfo::new).collect(Collectors.toList());

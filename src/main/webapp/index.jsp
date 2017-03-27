@@ -9,31 +9,7 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <%--ajax--%>
-    <script type="text/javascript">
-        function timer()
-        {
-            var xmlhttp;
-            if (window.XMLHttpRequest)
-            {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else
-            {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function()
-            {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    var result = xmlhttp.responseText;
-                    var jstr = JSON.parse(result);
-                    document.getElementById("transaction").innerHTML=jstr.tagName;
-                }
-            }
-            xmlhttp.open("GET","/tag/get/all",true);
-            xmlhttp.send();
-        }
+    <script src="js/index.js">
     </script>
 </head>
 <body>
@@ -41,12 +17,36 @@
     <h1 style="text-align: center;color: blue; background-color: cornsilk">Welcome to your time manager</h1>
 </div>
 <hr style="height:3px;border:none;border-top:3px groove deepskyblue;" />
-<form action="/item/add" method="post">
-    <input type="text" name="content" placeholder="What are you working on?" style="width: 60%; border: none; height: 50px; font-size: 20px"/>
+<%--<form action="/item/add" method="post">--%>
+    <%--<input type="text" name="content" placeholder="What are you working on?" style="width: 60%; border: none; height: 50px; font-size: 20px"/>--%>
+<%--</form>--%>
+<div class="row-fluid" >
+    <div class="span6" style="float: left;width: 50%">
+            <input type="text" name="content" placeholder="What are you working on?" style="width: 100%; border: none; height: 50px; font-size: 20px"/>
+    </div>
+    <div class="span6" style="float: left;width: 50%">
+        <div class="row-fluid">
+            <div class="span4" style="float:left;width: 30%;position: relative">
+                <button class="btn btn-info" type="button" id="projectName" >Choose Project</button>
 
-</form>
+            </div>
+            <div class="span4" style="float: left;width:30%;">
+                <button class="btn btn-success" type="button" id="tagName" onclick="getTags('/tag/get/all')">Choose Tag</button>
+                <div style="display: none;position: absolute;width: 100%" id="selectTag">
+                    <input type="search" placeholder="Find project" oninput="selectTag()" style="width: 100px">
+                    <div id="taglist" style="position: absolute;width: 100%"></div>
+                </div>
+            </div>
+            <div class="span4" style="float: left;width: 30%">
+                <button class="btn btn-primary" type="button" onclick="addItem()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <%--<div class="container-fluid">--%>
+
+
+<%--<div class="container-fluid">--%>
     <%--<div class="row">--%>
         <%--<div class="span2  col-xs-12 col-sm-3 col-md-2" >--%>
             <%--<ul class="nav nav-pills nav-stacked">--%>

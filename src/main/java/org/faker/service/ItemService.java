@@ -25,17 +25,15 @@ public class ItemService {
     /**
      * 创建Item
      * @param content
-     * @param projectId
-     * @param tagId
      * @return
      */
-    public Item createItem(String content, Integer projectId, Integer tagId){
+    public Item createItem(String content, String projectName, String tagName){
         Item item = new Item();
         item.setContent(content);
-        if (projectId != null)
-            item.setProject(projectRepository.findOne(projectId));
-        if (tagId != null)
-            item.setTag(tagRepository.findOne(tagId));
+        if (projectName != null)
+            item.setProject(projectRepository.findByProjectName(projectName));
+        if (projectName != null)
+            item.setTag(tagRepository.findByTagName(tagName));
         item.setCreateTime(new Date());
         itemRepository.save(item);
         return item;

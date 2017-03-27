@@ -18,18 +18,15 @@ public class ItemController {
     ItemService itemService;
     /**
      * 创建一个记录，项目标签可以为空
-     * @param content
-     * @param projectId
-     * @param tagId
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ItemInfo addItem(
             @RequestParam("content") String content,
-            @RequestParam(value = "projectId", required = false) Integer projectId,
-            @RequestParam(value = "tagId", required = false) Integer tagId
+            @RequestParam(value = "projectName", required = false) String projectName,
+            @RequestParam(value = "tagName", required = false) String tagName
     ){
-        Item item = itemService.createItem(content, projectId, tagId);
+        Item item = itemService.createItem(content, projectName, tagName);
         ItemInfo itemInfo = new ItemInfo(item);
         return itemInfo;
     }

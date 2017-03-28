@@ -28,8 +28,22 @@ public class ProjectService {
         return project;
     }
 
-    /**/
+    /**
+     * 获取所有项目
+     * @return
+     */
     public List<Project> getAllProjects(){
         return projectRepository.findAll();
     }
+
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     */
+    public List<Project> getProjectsByCondition(String name){
+        return projectRepository.findLikeName(name);
+    }
+
+
 }

@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <script src="js/index.js">
-    </script>
+    <script src="js/tag.js" type="text/javascript"></script>
+    <script src="js/project.js" type="text/javascript"></script>
+    <script src="js/item.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -22,19 +23,22 @@
 <%--</form>--%>
 <div class="row-fluid" >
     <div class="span6" style="float: left;width: 50%">
-        <input type="text" name="content" placeholder="What are you working on?" style="width: 100%; border: none; height: 50px; font-size: 20px"/>
+        <input type="text" id="content" placeholder="What are you working on?" style="width: 100%; border: none; height: 50px; font-size: 20px"/>
     </div>
     <div class="span6" style="float: left;width: 50%">
         <div class="row-fluid">
             <div class="span4" style="float:left;width: 30%;position: relative">
-                <button class="btn btn-info" type="button" id="projectName" >Choose Project</button>
-
+                <button class="btn btn-info" type="button" id="projectName" onclick="getProjects('/project/get/all')">Choose Project</button>
+                <div style="display: none;position: absolute;width: 100%" id="selectProject">
+                    <input id="projectCondition" type="text" placeholder="Find project" oninput="getProjects('/project/get/condition?name='+this.value)" style="width: 100px">
+                    <div id="projectlist" style="position: absolute;width: 100%"></div>
+                </div>
             </div>
             <%--Tag button--%>
             <div class="span4" style="float: left;width:30%;">
-                <button class="btn btn-success" type="button" id="tagName" onclick="getTags('/tag/get/all')">Choose Tag</button>
+                <button class="btn btn-success" type="button" id="tagName" onclick="getTags('/tag/get/all')" >Choose Tag</button>
                 <div style="display: none;position: absolute;width: 100%" id="selectTag">
-                    <input id="tagCondition" type="text" placeholder="Find project" oninput="getTags('/tag/get/condition?name='+this.value)" style="width: 100px">
+                    <input id="tagCondition" type="text" placeholder="Find tag" oninput="getTags('/tag/get/condition?name='+this.value)" style="width: 100px">
                     <div id="taglist" style="position: absolute;width: 100%"></div>
                 </div>
             </div>

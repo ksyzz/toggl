@@ -2,8 +2,7 @@
  * Created by csdc01 on 2017/3/27.
  */
 var taginfos;
-function getTags(url)
-{
+function getTags(url) {
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -31,8 +30,8 @@ function getTags(url)
             }
             text = text + "<button style='width: 100px;background-color: lawngreen'  onclick='createTag()'>Create new tag</button>";
             document.getElementById("taglist").innerHTML=text;
-            document.createElement("taginfos");
-            document.getElementById("taginfos").innerHTML = jstr;
+            // document.createElement("taginfos");
+            // document.getElementById("taginfos").innerHTML = jstr;
         }
     }
 
@@ -76,31 +75,8 @@ function createTag() {
 
     }
     xmlhttp.open("POST",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("tagName="+tagName);
 }
-function addItem() {
-    var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    var projectName = document.getElementById("projectName").innerHTML;
-    var tagName = document.getElementById("tagName").innerHTML;
-    var content = document.getElementById("content").innerHTML;
-    tagName = tagName == "Choose Tag" ? null : tagName;
-    projectName = projectName == "Choose Project" ? null : projectName;
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            // 重定向 刷新item
-        }
-    }
-    xmlhttp.open("POST","/item/add",true);
-    xmlhttp.send("content=content&projectName=projectName&tagName=tagName");
-}
+
 

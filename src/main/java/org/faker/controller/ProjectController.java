@@ -33,7 +33,6 @@ public class ProjectController {
     public ProjectInfo addProject(
             @RequestParam("projectName") String projectName
     ){
-        // TODO: 2017/3/24 判断是否已经存在
         Project project = projectService.addProject(projectName);
         return new ProjectInfo(project);
     }
@@ -46,6 +45,20 @@ public class ProjectController {
     @ResponseBody
     public List<ProjectInfo> getAllProjects(){
         List<Project> projects = projectService.getAllProjects();
+        return projects.stream().map(ProjectInfo::new).collect(Collectors.toList());
+    }
+
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     */
+    @RequestMapping(value = "/get/condition", method = RequestMethod.GET)
+    @ResponseBody
+    public List<ProjectInfo> getProjectByCondition(
+            @RequestParam("name") String name
+    ){
+        List<Project> projects = projectService.getProjectsByCondition(name);
         return projects.stream().map(ProjectInfo::new).collect(Collectors.toList());
     }
 }

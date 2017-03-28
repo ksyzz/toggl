@@ -19,17 +19,17 @@ function getProjects(url) {
         {
             var result = xmlhttp.responseText;
             var jstr = JSON.parse(result);
-            var projectselect = document.getElementById("selectProject");
-            projectselect.style.display = "block";
+            // var projectselect = document.getElementById("selectProject");
+            // projectselect.style.display = "block";
             var text = "";
             var projectName="";
             projectinfos=jstr;
             document.getElementById("projectlist").innerHTML="";
             for (var i = 0; i < jstr.length; i++){
                 projectName = jstr[i].projectName;
-                text = text + "<button style='background-color: bisque;width: 100px' onclick='changeProject(\""+projectName+"\")'>"+projectName+"</button><br/>";
+                text = text + "<button style='background-color: bisque;width: 100%' onclick='changeProject(\""+projectName+"\")'>"+projectName+"</button><br/>";
             }
-            text = text + "<button style='width: 100px;background-color: lawngreen'  onclick='createProject()'>Create new Project</button>";
+            text = text + "<button style='width: 100%;background-color: lawngreen'  onclick='createProject()'>Create new Project</button>";
             document.getElementById("projectlist").innerHTML=text;
             // taginfos=jstr;
             // document.createElement("taginfos");

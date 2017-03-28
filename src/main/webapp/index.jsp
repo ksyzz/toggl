@@ -25,12 +25,21 @@
     <div class="span6" style="float: left;width: 50%">
         <div class="row-fluid">
             <div class="span4" style="float:left;width: 30%;position: relative">
-                <button class="btn btn-info" type="button" id="projectName" onclick="getProjects('/project/get/all')">Choose Project</button>
-                <div style="display: none;position: absolute;width: 100%" id="selectProject">
-                    <input id="projectCondition" type="text" placeholder="Find project" oninput="getProjects('/project/get/condition?name='+this.value)" style="width: 100px">
-                    <div id="projectlist" style="position: absolute;width: 100%"></div>
-                </div>
+                <%--<button class="btn btn-info" type="button" id="projectName" onclick="getProjects('/project/get/all')">Choose Project</button>--%>
+                <%--<div style="display: none;position: absolute;width: 100%" id="selectProject">--%>
+                    <%--<input id="projectCondition" type="text" placeholder="Find project" oninput="getProjects('/project/get/condition?name='+this.value)" style="width: 100px">--%>
+                    <%--<div id="projectlist" style="position: absolute;width: 100%"></div>--%>
+                <%--</div>--%>
+                    <button data-toggle="dropdown" class="btn dropdown-toggle" id="projectName" onclick="getProjects('/project/get/all')"> Choose Project
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" contenteditable="true">
+                        <input id="projectCondition" type="text" placeholder="Find project" oninput="getProjects('/project/get/condition?name='+this.value)">
+                        <div id="projectlist" style="position: relative;width: 100%"></div>
+
+                    </ul>
             </div>
+
             <%--Tag button--%>
             <div class="span4" style="float: left;width:30%;">
                 <button class="btn btn-success" type="button" id="tagName" onclick="getTags('/tag/get/all')" >Choose Tag</button>

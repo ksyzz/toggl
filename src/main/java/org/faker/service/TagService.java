@@ -17,7 +17,7 @@ public class TagService {
     TagRepository tagRepository;
 
     /**
-     * 添加一个标签
+     * 添加一个 标签
      * @param tagName
      * @return
      */
@@ -34,5 +34,12 @@ public class TagService {
      */
     public List<Tag> getAllTags(){
         return tagRepository.findAll();
+    }
+
+    /**
+     * 模糊查询
+     */
+    public List<Tag> getTagsByCondition(String name){
+        return tagRepository.findLikeName(name);
     }
 }

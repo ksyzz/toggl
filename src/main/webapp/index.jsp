@@ -18,11 +18,11 @@
 </div>
 <hr style="height:3px;border:none;border-top:3px groove deepskyblue;" />
 <%--<form action="/item/add" method="post">--%>
-    <%--<input type="text" name="content" placeholder="What are you working on?" style="width: 60%; border: none; height: 50px; font-size: 20px"/>--%>
+<%--<input type="text" name="content" placeholder="What are you working on?" style="width: 60%; border: none; height: 50px; font-size: 20px"/>--%>
 <%--</form>--%>
 <div class="row-fluid" >
     <div class="span6" style="float: left;width: 50%">
-            <input type="text" name="content" placeholder="What are you working on?" style="width: 100%; border: none; height: 50px; font-size: 20px"/>
+        <input type="text" name="content" placeholder="What are you working on?" style="width: 100%; border: none; height: 50px; font-size: 20px"/>
     </div>
     <div class="span6" style="float: left;width: 50%">
         <div class="row-fluid">
@@ -30,35 +30,34 @@
                 <button class="btn btn-info" type="button" id="projectName" >Choose Project</button>
 
             </div>
+            <%--Tag button--%>
             <div class="span4" style="float: left;width:30%;">
                 <button class="btn btn-success" type="button" id="tagName" onclick="getTags('/tag/get/all')">Choose Tag</button>
                 <div style="display: none;position: absolute;width: 100%" id="selectTag">
-                    <input type="search" placeholder="Find project" oninput="selectTag()" style="width: 100px">
+                    <input id="tagCondition" type="text" placeholder="Find project" oninput="getTags('/tag/get/condition?name='+this.value)" style="width: 100px">
                     <div id="taglist" style="position: absolute;width: 100%"></div>
                 </div>
             </div>
-            <div class="span4" style="float: left;width: 30%">
+            <div class="span4"  style="float: left;width: 30%">
                 <button class="btn btn-primary" type="button" onclick="addItem()">Add</button>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <%--<div class="container-fluid">--%>
-    <%--<div class="row">--%>
-        <%--<div class="span2  col-xs-12 col-sm-3 col-md-2" >--%>
-            <%--<ul class="nav nav-pills nav-stacked">--%>
-                <%--<li class="active"><a href="pages/test.jsp">Timer</a></li>--%>
-                <%--<li><a href="" onclick="timer()">Graph</a></li>--%>
-            <%--</ul>--%>
-            <%--<button onclick="timer()"/>--%>
-        <%--</div>--%>
-        <%--<div class="col-xs-12 col-sm-9 col-md-10" id="transaction">--%>
+<%--<div class="row">--%>
+<%--<div class="span2  col-xs-12 col-sm-3 col-md-2" >--%>
+<%--<ul class="nav nav-pills nav-stacked">--%>
+<%--<li class="active"><a href="pages/test.jsp">Timer</a></li>--%>
+<%--<li><a href="" onclick="timer()">Graph</a></li>--%>
+<%--</ul>--%>
+<%--<button onclick="timer()"/>--%>
+<%--</div>--%>
+<%--<div class="col-xs-12 col-sm-9 col-md-10" id="transaction">--%>
 
-        <%--</div>--%>
-    <%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
 <%--</div>--%>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->

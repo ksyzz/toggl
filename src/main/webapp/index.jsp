@@ -18,9 +18,6 @@
     <h1 style="text-align: center;color: blue; background-color: cornsilk">Welcome to your time manager</h1>
 </div>
 <hr style="height:3px;border:none;border-top:3px groove deepskyblue;" />
-<%--<form action="/item/add" method="post">--%>
-<%--<input type="text" name="content" placeholder="What are you working on?" style="width: 60%; border: none; height: 50px; font-size: 20px"/>--%>
-<%--</form>--%>
 <div class="row-fluid" >
     <div class="span6" style="float: left;width: 50%">
         <input type="text" id="content" placeholder="What are you working on?" style="width: 100%; border: none; height: 50px; font-size: 20px"/>
@@ -46,6 +43,10 @@
                 <button class="btn btn-primary" type="button" onclick="addItem()">Add</button>
             </div>
         </div>
+    </div>
+    <hr style="height:3px;border:none;border-top:3px groove #060a8b;" />
+    <div id="itemlist">
+
     </div>
 </div>
 

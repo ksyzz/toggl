@@ -1,6 +1,8 @@
 /**
  * Created by csdc01 on 2017/3/27.
  */
+
+/*待修改*/
 var taginfos;
 function getTags(url) {
     var xmlhttp;
@@ -30,8 +32,7 @@ function getTags(url) {
             }
             text = text + "<button style='width: 100px;background-color: lawngreen'  onclick='createTag()'>Create new tag</button>";
             document.getElementById("taglist").innerHTML=text;
-            // document.createElement("taginfos");
-            // document.getElementById("taginfos").innerHTML = jstr;
+
         }
     }
 

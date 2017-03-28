@@ -1,6 +1,7 @@
 /**
  * Created by csdc01 on 2017/3/28.
  */
+/*待修改*/
 var projectinfos;
 function getProjects(url) {
     var xmlhttp;

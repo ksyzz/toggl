@@ -89,5 +89,16 @@ $(function () {
         function () {
             $(this).css("color", 'purple');
         }
-    )
+    );
+
+    $(document).click(function () {
+            $("#tagMessage").hide();
+    });
+    $("#tagMessage").click(function (e) {
+        e.stopPropagation();
+    })
+    $("#tag").click(function (e) {
+        $("#tagMessage").show();
+        e.stopPropagation();
+    });
 })

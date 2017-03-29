@@ -16,18 +16,31 @@
     <link rel="stylesheet" href="css/toggl.css" type="text/css">
 </head>
 <body style="background-color: rgba(1, 0, 12, 0.89)">
-    <div class="left">
+    <div class="left" id="tabs">
         Toggl<br/>
-        Timer<br/>
-        Dashboard<br/>
+        <ul>
+            <li><a style="color:white" href="#timer">Timer</a></li>
+            <li><a style="color:white" href="#dashboard">Dashboard</a></li>
+        </ul>
     </div>
-    <div class="right" id="index">
+    <div class="right" id="timer">
         <div class="top">
-            <input type="text" id="content" class="text" placeholder="   What are you working on"/>
-            <a id="project" class=""><strong>+</strong>Project/task</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a id="tag"><strong>+</strong>Tag</a>
+            <%--&nbsp;&nbsp;&nbsp;--%>
+            <div class="text"><input type="text" id="content" class="text" style="width: 100%" placeholder="   What are you working on"/></div>
+            <div class="subtop"><p><a id="project" href="#"><strong>+</strong>Project/task</a></p></div>
+            <div class="subtop"><p><a id="tag" href="#"><strong>+</strong>Tag</a></p>
+                <%--<ul class="dropdown-menu" id="tagMessage">--%>
+                    <%--<li><input type="search" placeholder="Find tag" style="height: 30px"></li>--%>
+                    <%--<div id="tagList"></div>--%>
+                <%--</ul></div>--%>
+            </div>
         </div>
-        <hr style="color:deepskyblue;" />
+
+        <div>testssss</div>
     </div>
+    <div class="right" id="dashboard" style="display: none">
+
+    </div>
+
 </body>
 </html>

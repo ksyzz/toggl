@@ -29,6 +29,7 @@ public class TagController {
      */
 
     @RequestMapping(value= "/add", method = RequestMethod.POST)
+    @ResponseBody
     public TagInfo addTag(
             @RequestParam("tagName") String tagName
     ){

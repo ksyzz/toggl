@@ -5,6 +5,7 @@
     width: 12%;
     height: 100%;
     font-size: 20px;
+    line-height: 30px;
 }
 .right{
     float: right;
@@ -17,6 +18,7 @@
 }
 .top{
     position: relative;
+    border-bottom: 1px solid deepskyblue;
     top: 0px;
     right: 0px;
     width: 100%;
@@ -24,13 +26,33 @@
     font-size: 15px;
 }
 .text{
+    float: left;
     border:none;
-    height: 70px;
-    line-height: 70px;
+    height: 100%;
+    line-height: 100%;
+    bottom: 0px;
     font-size: 20px;
     width: 50%;
 }
+.toptag{
+    border:none;
+    position: relative;
+    left: 60%;
+    right: 80%;
+    display: none;
+
+}
+.subtop{
+    float: left;
+    width: 10%;
+    font-size: 18px;
+    text-align: center;
+    bottom: 0px;
+}
 a{
     color:purple;
-    font-size: 17px;
+    bottom: 0px;
+}
+p{
+    vertical-align: middle;
 }

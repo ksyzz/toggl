@@ -27,6 +27,7 @@ public class ItemController {
             @RequestParam(value = "projectName", required = false) String projectName,
             @RequestParam(value = "tagName", required = false) String tagName
     ){
+        content = content.equals("") ? "Add task description" : content;
         Item item = itemService.createItem(content, projectName, tagName);
         ItemInfo itemInfo = new ItemInfo(item);
         return itemInfo;

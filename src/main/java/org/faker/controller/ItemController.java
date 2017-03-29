@@ -21,6 +21,7 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
     public ItemInfo addItem(
             @RequestParam("content") String content,
             @RequestParam(value = "projectName", required = false) String projectName,

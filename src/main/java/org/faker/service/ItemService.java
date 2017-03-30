@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by fengqian on 2017/3/23.
@@ -68,6 +69,13 @@ public class ItemService {
             item.setTag(tagRepository.findOne(tagId));
         itemRepository.save(item);
         return item;
+    }
 
+    /**
+     * 获取所有task
+     * @return
+     */
+    public List<Item> getAllItems(){
+        return itemRepository.findAll();
     }
 }

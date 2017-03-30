@@ -48,17 +48,5 @@ public class ProjectController {
         return projects.stream().map(ProjectInfo::new).collect(Collectors.toList());
     }
 
-    /**
-     * 模糊查询
-     * @param name
-     * @return
-     */
-    @RequestMapping(value = "/get/condition", method = RequestMethod.GET)
-    @ResponseBody
-    public List<ProjectInfo> getProjectByCondition(
-            @RequestParam("name") String name
-    ){
-        List<Project> projects = projectService.getProjectsByCondition(name);
-        return projects.stream().map(ProjectInfo::new).collect(Collectors.toList());
-    }
+
 }

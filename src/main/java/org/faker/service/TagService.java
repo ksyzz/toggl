@@ -36,10 +36,5 @@ public class TagService {
         return tagRepository.findAll();
     }
 
-    /**
-     * 模糊查询
-     */
-    public List<Tag> getTagsByCondition(String name){
-        return tagRepository.findLikeName(name);
-    }
+
 }

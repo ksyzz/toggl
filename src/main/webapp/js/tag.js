@@ -1,86 +1,5 @@
-// /**
-//  * Created by csdc01 on 2017/3/27.
-//  */
-//
-// /*待修改*/
-// var taginfos;
-// function getTags(url) {
-//     var xmlhttp;
-//     if (window.XMLHttpRequest)
-//     {// code for IE7+, Firefox, Chrome, Opera, Safari
-//         xmlhttp=new XMLHttpRequest();
-//     }
-//     else
-//     {// code for IE6, IE5
-//         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-//     }
-//     xmlhttp.onreadystatechange=function()
-//     {
-//         if (xmlhttp.readyState==4 && xmlhttp.status==200)
-//         {
-//             var result = xmlhttp.responseText;
-//             var jstr = JSON.parse(result);
-//             var tagselect = document.getElementById("selectTag");
-//             tagselect.style.display = "block";
-//             var text = "";
-//             var tagName="";
-//             taginfos = jstr;
-//             document.getElementById("taglist").innerHTML="";
-//             for (var i = 0; i < jstr.length; i++){
-//                 tagName = jstr[i].tagName;
-//                 text = text + "<button style='background-color: bisque;width: 100px' onclick='changeTag(\""+tagName+"\")'>"+tagName+"</button><br/>";
-//             }
-//             text = text + "<button style='width: 100px;background-color: lawngreen'  onclick='createTag()'>Create new tag</button>";
-//             document.getElementById("taglist").innerHTML=text;
-//
-//         }
-//     }
-//
-//     xmlhttp.open("GET",url,true);
-//     xmlhttp.send();
-// }
-// function changeTag(tagName) {
-//     var a = document.getElementById("tagName");
-//     a.innerHTML=tagName;
-//     var tagselect = document.getElementById("selectTag");
-//     tagselect.style.display = "none";
-//     document.getElementById("tagCondition").innerHTML="";
-// }
-// function createTag() {
-//     var xmlhttp;
-//     var url="/tag/add";
-//     var tagName = prompt("Please input tagName");
-//     if (tagName=="")
-//     {
-//         alert("Please input tagName");
-//         return;
-//     }
-//     for (var i = 0; i < taginfos.length; i++){
-//         if (taginfos[i].tagName == tagName)
-//         {
-//             alert("Tag is exist");
-//             return;
-//         }
-//     }
-//     if (window.XMLHttpRequest)
-//     {// code for IE7+, Firefox, Chrome, Opera, Safari
-//         xmlhttp=new XMLHttpRequest();
-//     }
-//     else
-//     {// code for  IE6, IE5
-//         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-//     }
-//     xmlhttp.onreadystatechange=function()
-//     {
-//         changeTag(tagName);
-//
-//     }
-//     xmlhttp.open("POST",url,true);
-//     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//     xmlhttp.send("tagName="+tagName);
-// }
-//
-//
+
+var tagInfos = "";
 $(function () {
     $("#tag").hover(
         function () {
@@ -89,17 +8,97 @@ $(function () {
         function () {
             $(this).css("color", 'green');
         }
-    );
-
+    )
     $(document).click(function () {
-            $("#tagMessage").hide();
+        $("#tagMessage").remove();
     });
-    $("#tagMessage").click(function (e) {
-        e.stopPropagation();
-    })
+
+
     $("#tag").click(function (e) {
-        $("#tagMessage").show();
-        $("#projectMessage").hide();
+        var tm = $("<div class='tag' id='tagMessage' onclick='except(e)'> <input id='tag_condition' type='text' placeholder='Find Tag' style='height: 35px;font-size: 15px; width: 200px;' oninput='searchTag(this.value)'><div id='tagList' style='text-align: left; width: inherit'></div> </div>");
+        var parent = $(this).parent();
+        parent.append(tm);
+        $("#tagMessage").click(function (e) {
+            e.stopPropagation();
+        })
+        if (tagInfos == ""){
+            $.ajax({
+                url:"/tag/get/all",
+                type:'GET',
+                dataType:"json",
+                success:function (data) {
+                    tagInfos = data;
+                    listTags(data);
+
+                }
+            });
+        }else {
+            listTags(tagInfos);
+        }
+        $("#projectMessage").remove();
         e.stopPropagation();
+
     });
+
 })
+function selectTag(value) {
+    $("#tag").html(value);
+    $("#tagMessage").remove();
+}
+function searchTag(condition) {
+        if (condition != ""){
+            // dai xiu gai
+            var tagName = "";
+            var text = "";
+            $("#tagList").html("");
+            for (var i = 0; i < tagInfos.length; i++){
+                if (tagInfos[i].tagName.indexOf(condition) > -1){
+                    tagName = tagInfos[i].tagName;
+                    text = text + "<li><button class='tagName' onclick='selectTag(\""+ tagName +"\")'>" + tagName + "</button></li>";
+                }
+            }
+            text = text + "<button class='create' id='addTag'>+Create new tag</button>";
+            $("#tagList").html(text);
+        }else {
+            listTags(tagInfos);
+        }
+
+
+}
+function listTags(data) {
+
+    var tagName = "";
+    var text = "";
+    $("#tagList").html("");
+    for (var i = 0; i < data.length; i++){
+        tagName = data[i].tagName;
+        text = text + "<li><button class='tagName' onclick='selectTag(\""+ tagName +"\")'>" + tagName + "</button></li>";
+    }
+    text = text + "<button class='create' onclick='createTag()'>+Create new tag</button>";
+    $("#tagList").html(text);
+}
+function createTag() {
+    var tagName = prompt("Please input tagName:");
+    for (var i = 0; i < tagInfos.length; i++){
+        if (tagInfos[i].tagName == tagName)
+        {
+            alert("Tag is exist");
+            return;
+        }
+    }
+    $.ajax({
+        url:"/tag/add",
+        type:"POST",
+        data:{tagName:tagName},
+        dataType:"json",
+        success:function(data){
+            selectTag(data.tagName);
+            tagInfos.push(data);
+        }
+
+    });
+}
+function except(element) {
+
+    element.stopPropagation();
+}

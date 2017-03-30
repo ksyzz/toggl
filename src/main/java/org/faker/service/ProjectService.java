@@ -36,14 +36,6 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    /**
-     * 模糊查询
-     * @param name
-     * @return
-     */
-    public List<Project> getProjectsByCondition(String name){
-        return projectRepository.findLikeName(name);
-    }
 
 
 }

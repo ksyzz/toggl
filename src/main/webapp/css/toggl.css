@@ -25,6 +25,13 @@
     height: 70px;
     font-size: 15px;
 }
+.other{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    background-color: bisque;
+}
 .text{
     float: left;
     border:none;
@@ -37,13 +44,14 @@
 .tag,.project{
     border:5px lightblue;
     position: absolute;
+    z-index: 999;
     top: 70px;
     width: 200px;
-    display: none;
+    display:block;
     background-color: lightcyan;
 
 }
-.projectName{
+.projectName,.tagName{
     color: midnightblue;
     font-size:20px;
     height: 25px;
@@ -71,5 +79,21 @@ a{
     bottom: 0px;
 }
 p{
-    vertical-align: middle;
+    vertical-align: bottom;
+}
+.item{
+    position: relative;
+    border-bottom: 1px solid deepskyblue;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+.itemtext{
+    border: none;
+    position: absolute;
+    font-size: 20px;
+    background-color: inherit;
+    left: 1%;
+    width: 30%;
+    height: 50px;
 }

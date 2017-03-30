@@ -48,15 +48,4 @@ public class TagController {
         return tags.stream().map(TagInfo::new).collect(Collectors.toList());
     }
 
-    /**
-     * 根据条件 获取标签
-     */
-    @RequestMapping(value = "/get/condition", method = RequestMethod.GET)
-    @ResponseBody
-    public List<TagInfo> getTagsByCondition(
-            @RequestParam("name") String name
-    ){
-        List<Tag> tags = tagService.getTagsByCondition(name);
-        return tags.stream().map(TagInfo::new).collect(Collectors.toList());
-    }
 }

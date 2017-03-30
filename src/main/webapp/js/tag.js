@@ -84,10 +84,10 @@
 $(function () {
     $("#tag").hover(
         function () {
-            $(this).css("color", 'green');
+            $(this).css("color", 'red');
         },
         function () {
-            $(this).css("color", 'purple');
+            $(this).css("color", 'green');
         }
     );
 
@@ -99,6 +99,7 @@ $(function () {
     })
     $("#tag").click(function (e) {
         $("#tagMessage").show();
+        $("#projectMessage").hide();
         e.stopPropagation();
     });
 })

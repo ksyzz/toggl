@@ -34,13 +34,21 @@
     font-size: 20px;
     width: 50%;
 }
-.toptag{
-    border:none;
-    position: relative;
-    left: 60%;
-    right: 80%;
+.tag,.project{
+    border:5px lightblue;
+    position: absolute;
+    top: 70px;
+    width: 200px;
     display: none;
+    background-color: lightcyan;
 
+}
+.projectName{
+    color: midnightblue;
+    font-size:20px;
+    height: 25px;
+    border:none;
+    background-color: inherit;
 }
 .subtop{
     float: left;
@@ -48,9 +56,18 @@
     font-size: 18px;
     text-align: center;
     bottom: 0px;
+    position: relative;
+}
+.create{
+    text-align: center;
+    width:200px;
+    color: forestgreen;
+    font-size: 18px;
+    border-top:2px black;
+    border: none;
 }
 a{
-    color:purple;
+    color:green;
     bottom: 0px;
 }
 p{

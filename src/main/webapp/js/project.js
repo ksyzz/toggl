@@ -80,14 +80,76 @@
 //     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 //     xmlhttp.send("projectName="+projectName);
 // }
+var projectInfos = "";
 $(function () {
     $("#project").hover(
         function () {
-            $(this).css("color", 'green');
+            $(this).css("color", 'red');
         },
         function () {
-            $(this).css("color", 'purple');
+            $(this).css("color", 'green');
         }
     )
+    $(document).click(function () {
+        $("#projectMessage").hide();
+        $("#project_condition").val("");
+    });
+    $("#projectMessage").click(function (e) {
+        e.stopPropagation();
+    })
+    $("#project").click(function (e) {
+        if (projectInfos == ""){
+            $.ajax({
+                url:"/project/get/all",
+                type:'GET',
+                dataType:"json",
+                success:function (data) {
+                    projectInfos = data;
+                    listProjects(data);
+
+                }
+            });
+        }else {
+            listProjects(projectInfos);
+        }
+        $("#projectMessage").show();
+        $("#tagMessage").hide();
+        e.stopPropagation();
+    });
 
 })
+function selectProject(value) {
+    $("#project").html(value);
+    $("#project_condition").val("");
+    $("#projectMessage").hide();
+}
+function search(condition) {
+    if (condition != ""){
+        // dai xiu gai
+        var projectName = "";
+        var text = "";
+        $("#projectList").html("");
+        for (var i = 0; i < projectInfos.length; i++){
+            if (projectInfos[i].projectName.indexOf(condition) > -1){
+                projectName = projectInfos[i].projectName;
+                text = text + "<li><button class='projectName' onclick='selectProject(\""+ projectName +"\")'>" + projectName + "</button></li>";
+            }
+        }
+        text = text + "<button class='create' id='addProject'>+Create new project</button>";
+        $("#projectList").html(text);
+    }else {
+        listProjects(projectInfos);
+    }
+
+}
+function listProjects(data) {
+    var projectName = "";
+    var text = "";
+    $("#projectList").html("");
+    for (var i = 0; i < data.length; i++){
+        projectName = data[i].projectName;
+        text = text + "<li><button class='projectName' onclick='selectProject(\""+ projectName +"\")'>" + projectName + "</button></li>";
+    }
+    text = text + "<button class='create' id='addProject'>+Create new project</button>";
+    $("#projectList").html(text);
+}

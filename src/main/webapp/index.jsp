@@ -27,16 +27,20 @@
         <div class="top">
             <%--&nbsp;&nbsp;&nbsp;--%>
             <div class="text"><input type="text" id="content" class="text" style="width: 100%" placeholder="   What are you working on"/></div>
-            <div class="subtop"><p><a id="project" href="#"><strong>+</strong>Project/task</a></p></div>
-            <div class="subtop"><p><a id="tag" href="#"><strong>+</strong>Tag</a></p>
-                <%--<ul class="dropdown-menu" id="tagMessage">--%>
-                    <%--<li><input type="search" placeholder="Find tag" style="height: 30px"></li>--%>
-                    <%--<div id="tagList"></div>--%>
-                <%--</ul></div>--%>
+            <div class="subtop"><p><a id="project" ><strong>+</strong>Project/task</a></p>
+                <div class="project" id="projectMessage">
+                    <input id="project_condition" type="text" placeholder="Find Project" style="height: 40px;font-size: 15px; width: 200px;" oninput="search(this.value)">
+                    <div id="projectList" style="text-align: left; width: inherit"></div>
+                </div>
+            </div>
+            <div class="subtop"><p><a id="tag" ><strong>+</strong>Tag</a></p>
+                <div class="tag" id="tagMessage">
+                    <input id="tag_condition" type="text" placeholder="Find Tag" style="height: 40px;font-size: 15px; width: 200px;">
+                </div>
             </div>
         </div>
 
-        <div>testssss</div>
+        <div id="test">testssss</div>
     </div>
     <div class="right" id="dashboard" style="display: none">
 

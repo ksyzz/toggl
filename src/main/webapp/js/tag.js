@@ -14,10 +14,10 @@ $(function () {
     });
 
 
-    $("#tag").click(function (e) {
+    $(".subTag").click(function (e) {
         var tm = $("<div class='tag' id='tagMessage' onclick='except(e)'> <input id='tag_condition' type='text' placeholder='Find Tag' style='height: 35px;font-size: 15px; width: 200px;' oninput='searchTag(this.value)'><div id='tagList' style='text-align: left; width: inherit'></div> </div>");
-        var parent = $(this).parent();
-        parent.append(tm);
+        // var parent = .parent();
+        $(this).append(tm);
         $("#tagMessage").click(function (e) {
             e.stopPropagation();
         })

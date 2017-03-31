@@ -27,27 +27,25 @@
     <div class="right" id="timer">
         <div class="top">
             <div class="text"><input type="text" id="content" class="text" style="width: 100%" placeholder="   What are you working on"/></div>
-            <div class="subtop"><p><a id="project" ><strong>+</strong>Project/task</a></p>
+            <div class="subProject"><button class="button">+Project/task</button>>
                 <%--<div class="project" id="projectMessage">--%>
                     <%--<input id="project_condition" type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value)">--%>
                     <%--<div id="projectList" style="text-align: left; width: inherit"></div>--%>
                 <%--</div>--%>
             </div>
-            <div class="subtop"><p><a id="tag" ><strong>+</strong>Tag</a></p>
+            <div class="subTag"><button class="button">+Tag</button>
                 <%--<div class="tag" id="tagMessage">--%>
                     <%--<input id="tag_condition" type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value)">--%>
                     <%--<div id="tagList" style="text-align: left; width: inherit"></div>--%>
                 <%--</div>--%>
             </div>
-            <div class="subtop"></div>
         </div>
         <div id="itemList" class="other">
             <c:if test="${not empty itemInfos}">
                 <c:forEach items="${itemInfos}" var="itemInfo" >
                     <div class="item">
                         <div class="text" style="width: 30%"> <input class="itemtext" type="text" value="${itemInfo.content}"></div>
-                        <div class="subtop"><p><a onclick="changeProject()">${itemInfo.projectInfo.projectName}</a></p>
-
+                        <div class="subProject"><button class="button">${itemInfo.projectInfo.projectName}</button>
                         </div>
                     </div>
                 </c:forEach>

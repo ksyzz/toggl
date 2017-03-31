@@ -81,7 +81,6 @@
 //     xmlhttp.send("projectName="+projectName);
 // }
 var projectInfos = "";
-
 $(function () {
     $("#project").hover(
         function () {
@@ -95,14 +94,16 @@ $(function () {
         $("#projectMessage").remove();
     });
 
-    $("#project").click(function (e) {
-        var pm = $(" <div class='project' id='projectMessage'><input id='project_condition' type='text' placeholder='Find Project' style='height: 35px;font-size: 15px; width: 200px;' oninput='search(this.value)'>"+" <div id='projectList' style='text-align: left; width: inherit'></div></div>");
-        var parent = $(this).parent();
-        parent.append(pm);
+    $(".subProject").click(function (e) {
+        $("#projectMessage").remove();
+        var pm = $(" <div class='project' id='projectMessage'><input id='project_condition' type='text' placeholder='Find Project' style='height: 35px;font-size: 15px; width: 200px;' oninput='search(this.value)'> <div id='projectList' style='text-align: left; width: inherit'></div></div>");
+        var $this = $(this);
+        $this.append(pm);
+        var projectName = "";
+        var text = "";
         $("#projectMessage").click(function (e) {
             e.stopPropagation();
         });
-
         if (projectInfos == ""){
             $.ajax({
                 url:"/project/get/all",
@@ -110,25 +111,31 @@ $(function () {
                 dataType:"json",
                 success:function (data) {
                     projectInfos = data;
-                    listProjects(data);
                 }
             });
-        }else {
-            listProjects(projectInfos);
         }
+        for (var i = 0; i < projectInfos.length; i++){
+            projectName = projectInfos[i].projectName;
+            text = text + "<li><button class='projectName' onclick='selectProject(\""+ projectName +"\", this)' >"+ projectName + "</button></li>";
+        }
+        text = text + "<button class='create' onclick='createProject()'>+Create new project</button>";
+
+        $("#projectList").html(text);
+        $('.projectName').bind('click', function () {
+            $("#projectMessage").remove();
+        })
+
         $("#tagMessage").remove();
         e.stopPropagation();
-
      });
 
 })
-function selectProject(value) {
-    $("#project").html(value);
-    $("#projectMessage").remove();
+function selectProject(projectName, ele) {
+    $(ele).parent().parent().parent().parent().children().html(projectName);
+    $(ele).remove();
 }
+
 function search(condition) {
-    if (condition != ""){
-        // dai xiu gai
         var projectName = "";
         var text = "";
         $("#projectList").html("");
@@ -140,25 +147,28 @@ function search(condition) {
         }
         text = text + "<button class='create' id='addProject'>+Create new project</button>";
         $("#projectList").html(text);
-    }else {
-        listProjects(projectInfos);
-    }
+
 
 }
-function listProjects(data) {
-
-    var projectName = "";
-    var text = "";
-    $("#projectList").html("");
-    for (var i = 0; i < data.length; i++){
-        projectName = data[i].projectName;
-        text = text + "<li><button class='projectName' onclick='selectProject(\""+ projectName +"\")'>" + projectName + "</button></li>";
-    }
-    text = text + "<button class='create' onclick='createProject()'>+Create new project</button>";
-    $("#projectList").html(text);
-}
+// function listProjects(data) {
+//
+//     for (var i = 0; i < data.length; i++){
+//         projectName = data[i].projectName;
+//         text = text + "<li><button class='projectName' onclick='selectProject(\""+ projectName +"\")'>" + projectName + "</button></li>";
+//     }
+//     text = text + "<button class='create' onclick='createProject()'>+Create new project</button>";
+//     $("#projectList").html(text);
+//     // $(".projectName").click(function () {
+//     //     alert($(this).val());
+//     //     element.val($(this).text);//ccccc
+//     // })
+// }
 function createProject() {
     var projectName = prompt("Please input projectName:");
+    if (projectName == ""){
+        alert("Please input name");
+        return; //000000000
+    }
     for (var i = 0; i < projectInfos.length; i++){
         if (projectInfos[i].projectName == projectName)
         {
@@ -177,27 +187,4 @@ function createProject() {
         }
 
     });
-}
-function changeProject() {
-        alert("projeect");
-        var pm = $(" <div class='project' id='projectMessage'><input id='project_condition' type='text' placeholder='Find Project' style='height: 35px;font-size: 15px; width: 200px;' oninput='search(this.value)'>"+" <div id='projectList' style='text-align: left; width: inherit'></div></div>");
-        $(this).parent().append(pm);
-            if (projectInfos == ""){
-                $.ajax({
-                    url:"/project/get/all",
-                    type:'GET',
-                    dataType:"json",
-                    success:function (data) {
-                        projectInfos = data;
-                        listProjects(data);
-                    }
-                });
-            }else {
-                listProjects(projectInfos);
-            }
-            $("#tagMessage").remove();
-        $("#projectMessage").click(function (e) {
-            e.stopPropagation();
-        })
-
 }

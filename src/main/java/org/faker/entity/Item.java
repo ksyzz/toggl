@@ -2,6 +2,7 @@ package org.faker.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 记录的实体类
@@ -14,11 +15,8 @@ public class Item {
     @GeneratedValue
     private int id;
     private String content;
-    private Date createTime;
-    //暂停时间
-    private Date pauseTime;
-    //继续的时间
-    private Date continueTime;
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Time> times;
     @ManyToOne
     private Project project;
     @ManyToOne
@@ -32,13 +30,6 @@ public class Item {
         this.content = content;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public int getId() {
         return id;
@@ -48,20 +39,12 @@ public class Item {
         this.id = id;
     }
 
-    public Date getPauseTime() {
-        return pauseTime;
+    public List<Time> getTimes() {
+        return times;
     }
 
-    public void setPauseTime(Date pauseTime) {
-        this.pauseTime = pauseTime;
-    }
-
-    public Date getContinueTime() {
-        return continueTime;
-    }
-
-    public void setContinueTime(Date continueTime) {
-        this.continueTime = continueTime;
+    public void setTimes(List<Time> times) {
+        this.times = times;
     }
 
     public Project getProject() {

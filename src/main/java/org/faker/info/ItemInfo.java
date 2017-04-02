@@ -11,7 +11,6 @@ import java.util.Date;
 public class ItemInfo {
     private int itemId;
     private String content;
-    private Date createTime;
     private Date pauseTime;
     private Date continueTime;
     private TagInfo tagInfo;
@@ -20,9 +19,6 @@ public class ItemInfo {
     public ItemInfo(Item item) {
         this.itemId = item.getId();
         this.content = item.getContent();
-        this.createTime = item.getCreateTime();
-        this.pauseTime = item.getPauseTime();
-        this.continueTime = item.getContinueTime();
         if (item.getProject() != null)
             this.projectInfo = new ProjectInfo(item.getProject());
         if (item.getTag() != null)
@@ -43,14 +39,6 @@ public class ItemInfo {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public Date getPauseTime() {

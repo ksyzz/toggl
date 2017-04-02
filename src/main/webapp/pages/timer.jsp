@@ -14,6 +14,9 @@
     <script src="../js/mustache.js" type="text/javascript"></script>
     <script src="../js/project.js" type="text/javascript"></script>
     <script src="../js/tag.js" type="text/javascript"></script>
+    <script src="../js/item.js" type="text/javascript"></script>
+    <script src="../js/timers.js" type="text/javascript"></script>
+
     <link rel="stylesheet" href="../css/toggl.css" type="text/css">
 </head>
 <body style="background-color: rgba(1, 0, 12, 0.89)">
@@ -27,32 +30,47 @@
     <div class="right" id="timer">
         <div class="top">
             <div class="text"><input type="text" id="content" class="text" style="width: 100%" placeholder="   What are you working on"/></div>
-            <div class="subProject"><button class="button">+Project/task</button>>
-                <%--<div class="project" id="projectMessage">--%>
-                    <%--<input id="project_condition" type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value)">--%>
-                    <%--<div id="projectList" style="text-align: left; width: inherit"></div>--%>
-                <%--</div>--%>
+            <div class="subtop"><p><a id="project" >+Project/task</a></p>
+                <div class="project" id="projectMessage">
+                    <input id="project_condition" type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value, this)">
+                    <div id="projectList" style="text-align: left; width: inherit"></div>
+                </div>
             </div>
-            <div class="subTag"><button class="button">+Tag</button>
-                <%--<div class="tag" id="tagMessage">--%>
-                    <%--<input id="tag_condition" type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value)">--%>
-                    <%--<div id="tagList" style="text-align: left; width: inherit"></div>--%>
-                <%--</div>--%>
+            <div class="subtop"><p><a id="tag" >+Tag</a></p>
+                <div class="tag" id="tagMessage">
+                    <input id="tag_condition" type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value, this)">
+                    <div id="tagList" style="text-align: left; width: inherit"></div>
+                </div>
             </div>
+            <div class="subtop" id="countTime"></div>
+            <div class="subtop"><img class="img" id="img" src="/image/start.jpg"> </div>
         </div>
+        <div style="border: none; font-size:40px;color:blue;text-align: center; font-style: italic;font-family: 楷体;background-color: aliceblue;height: 60px">Item list</div>
         <div id="itemList" class="other">
             <c:if test="${not empty itemInfos}">
                 <c:forEach items="${itemInfos}" var="itemInfo" >
-                    <div class="item">
-                        <div class="text" style="width: 30%"> <input class="itemtext" type="text" value="${itemInfo.content}"></div>
-                        <div class="subProject"><button class="button">${itemInfo.projectInfo.projectName}</button>
+                    <div class="item" id="${itemInfo.itemId}">
+                        <div class="text" style="width: 40%;">
+                            <input class="itemtext" type="text" value="${itemInfo.content}">
+                        </div>
+                        <div class="subtopProject">
+                            <p><a>${itemInfo.projectInfo.projectName}</a></p>
+                            <div class="project" >
+                                <input type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value, this)">
+                                <div style="text-align: left; width: inherit"></div>
+                            </div>
+                        </div>
+                        <div class="subtopTag">
+                            <p><a>${itemInfo.tagInfo.tagName}</a></p>
+                            <div class="tag" >
+                                <input type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value, this)">
+                                <div style="text-align: left; width: inherit"></div>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
             </c:if>
         </div>
     </div>
-
-
 </body>
 </html>

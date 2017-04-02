@@ -30,7 +30,7 @@
     width: 100%;
     height: 100%;
     font-size: 20px;
-    background-color: bisque;
+    background-color: moccasin;
 }
 .text{
     float: left;
@@ -45,11 +45,10 @@
     border:5px lightblue;
     position: absolute;
     z-index: 999;
-    top: 100%;
+    top: 70px;
     width: 200px;
-    display:block;
+    display: none;
     background-color: lightcyan;
-
 }
 .projectName,.tagName{
     color: midnightblue;
@@ -58,13 +57,15 @@
     border:none;
     background-color: inherit;
 }
-.subProject,.subTag{
+.subtop,.subtopProject,.subtopTag {
     float: left;
-    width: 10%;
+    width: 13%;
     font-size: 18px;
+    text-align: center;
     bottom: 0px;
     position: relative;
 }
+
 .create{
     text-align: center;
     width:200px;
@@ -76,37 +77,33 @@
 a{
     color:green;
     bottom: 0px;
-    font-size: 20px;
+    font-weight: bold;
 }
 p{
-    vertical-align: bottom;
+    vertical-align: center;
 }
 .item{
     position: relative;
-    border-bottom: 1px solid midnightblue;
+    float: left;
+    border-bottom: 1px solid deepskyblue;
     width: 100%;
     height: 50px;
     font-size: 20px;
 }
 .itemtext{
     border: none;
-    position: absolute;
+    position: relative;
     font-size: 20px;
     background-color: inherit;
     left: 1%;
-    width: 30%;
-    height: 100%;
+    width: 90%;
+    height: 50px;
 }
-.button{
+.img{
+    top:5px;
+    bottom: 5px;
+    width: 60px;
+    height: 60px;
     border: none;
-    background-color: inherit;
-    font-size: 20px;
-    width: 100%;
-    height: 100%;
-    color: green;
-}
-.list{
-    bottom: 0px;
-    font-size: 20px;
-    color: saddlebrown;
+    align-content: center;
 }

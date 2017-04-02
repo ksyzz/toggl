@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by fengqian on 2017/3/23.
@@ -61,5 +63,11 @@ public class ItemController {
     ){
         Item item = itemService.modifyItem(id, content, projectId, tagId);
         return new ItemInfo(item);
+    }
+
+    @RequestMapping(value = "/get/all",method = RequestMethod.GET)
+    public List<ItemInfo> getAllItems(){
+        List<Item> items = itemService.getAllItems();
+        return items.stream().map(ItemInfo::new).collect(Collectors.toList());
     }
 }

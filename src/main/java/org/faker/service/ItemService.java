@@ -8,7 +8,6 @@ import org.faker.repository.TagRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,7 +34,6 @@ public class ItemService {
             item.setProject(projectRepository.findByProjectName(projectName));
         if (projectName != null)
             item.setTag(tagRepository.findByTagName(tagName));
-        item.setCreateTime(new Date());
         itemRepository.save(item);
         return item;
     }

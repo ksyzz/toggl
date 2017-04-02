@@ -1,7 +1,21 @@
+/**
+ * Created by csdc01 on 2017/3/28.
+ */
 
 var tagInfos = "";
+window.onload = getTagData();
+function getTagData() {
+    $.ajax({
+        url:"/tag/get/all",
+        type:'GET',
+        dataType:"json",
+        success:function (data) {
+            tagInfos = data;
+        }
+    });
+}
 $(function () {
-    $("#tag").hover(
+    $("a").hover(
         function () {
             $(this).css("color", 'red');
         },
@@ -10,95 +24,95 @@ $(function () {
         }
     )
     $(document).click(function () {
-        $("#tagMessage").remove();
+        $(".tag").hide(); /////////////////////////
+        $("#tag_condition").val("");
     });
-
-
-    $(".subTag").click(function (e) {
-        var tm = $("<div class='tag' id='tagMessage' onclick='except(e)'> <input id='tag_condition' type='text' placeholder='Find Tag' style='height: 35px;font-size: 15px; width: 200px;' oninput='searchTag(this.value)'><div id='tagList' style='text-align: left; width: inherit'></div> </div>");
-        // var parent = .parent();
-        $(this).append(tm);
-        $("#tagMessage").click(function (e) {
-            e.stopPropagation();
-        })
-        if (tagInfos == ""){
-            $.ajax({
-                url:"/tag/get/all",
-                type:'GET',
-                dataType:"json",
-                success:function (data) {
-                    tagInfos = data;
-                    listTags(data);
-
-                }
-            });
-        }else {
-            listTags(tagInfos);
-        }
-        $("#projectMessage").remove();
+    $("#tagMessage").click(function (e) {
         e.stopPropagation();
-
+    })
+    $("#tag").click(function (e) {
+        $('.tag').hide(); /////////////////////////////////
+        // if (projectInfos == ""){
+        //     $.ajax({
+        //         url:"/project/get/all",
+        //         type:'GET',
+        //         dataType:"json",
+        //         success:function (data) {
+        //             projectInfos = data;
+        //         }
+        //     });
+        // }
+        listTags(tagInfos, $("#tagList"));
+        $("#tagMessage").show();
+        $(".project").hide();//////////////////
+        e.stopPropagation();
     });
+    $(".subtopTag").on('click',function (e) {
+        $('.tag').hide();
+        listTags(tagInfos, $(this).children("div").children("div"));
+        $(this).children("div").show();
+        $('.project').hide();
+        e.stopPropagation();
+    });
+    // $('.subtopTag').click(function (e) {
+    //
+    // });
 
 })
-function selectTag(value) {
-    $("#tag").html(value);
-    $("#tagMessage").remove();
-}
-function searchTag(condition) {
-        if (condition != ""){
-            // dai xiu gai
-            var tagName = "";
-            var text = "";
-            $("#tagList").html("");
-            for (var i = 0; i < tagInfos.length; i++){
-                if (tagInfos[i].tagName.indexOf(condition) > -1){
-                    tagName = tagInfos[i].tagName;
-                    text = text + "<li><button class='tagName' onclick='selectTag(\""+ tagName +"\")'>" + tagName + "</button></li>";
-                }
+
+function searchTag(condition, ele) {
+    var $tagList = $(ele).parent().children("div");
+    if (condition != ""){
+        var selected = [];
+        $tagList.html("");
+        for (var i = 0; i < tagInfos.length; i++){
+            if (tagInfos[i].tagName.indexOf(condition) > -1){
+                selected.push(tagInfos[i]);
             }
-            text = text + "<button class='create' id='addTag'>+Create new tag</button>";
-            $("#tagList").html(text);
-        }else {
-            listTags(tagInfos);
         }
-
+        listTags(selected, $tagList);
+    }else {
+        listTags(tagInfos,$tagList);
+    }
 
 }
-function listTags(data) {
-
+function listTags(data, ele) {
     var tagName = "";
     var text = "";
-    $("#tagList").html("");
+    var $name = ele.parent().prev().children();
     for (var i = 0; i < data.length; i++){
         tagName = data[i].tagName;
-        text = text + "<li><button class='tagName' onclick='selectTag(\""+ tagName +"\")'>" + tagName + "</button></li>";
+        text = text + "<li><input type='button' class='tagName' value=\""+tagName+"\"></li>";
     }
-    text = text + "<button class='create' onclick='createTag()'>+Create new tag</button>";
-    $("#tagList").html(text);
-}
-function createTag() {
-    var tagName = prompt("Please input tagName:");
-    for (var i = 0; i < tagInfos.length; i++){
-        if (tagInfos[i].tagName == tagName)
-        {
-            alert("Tag is exist");
-            return;
-        }
-    }
-    $.ajax({
-        url:"/tag/add",
-        type:"POST",
-        data:{tagName:tagName},
-        dataType:"json",
-        success:function(data){
-            selectTag(data.tagName);
-            tagInfos.push(data);
-        }
-
+    text = text + "<button class='create'>+Create new tag</button>";
+    ele.html(text);
+    // onclick='createProject()'
+    $('.tagName').click(function (e) {
+        $name.html($(this).val());
+        ele.parent().css("display",'none');
+        ele.prev().val("");
+        e.stopPropagation();
     });
-}
-function except(element) {
-
-    element.stopPropagation();
+    $('.create').click(function (e) {
+        var tagName = prompt("Please input tagName:");
+        for (var i = 0; i < tagInfos.length; i++){
+            if (tagInfos[i].tagName == tagName)
+            {
+                alert("Tag is exist");
+                return;
+            }
+        }
+        $.ajax({
+            url:"/tag/add",
+            type:"POST",
+            data:{tagName:tagName},
+            dataType:"json",
+            success:function(data){
+                tagInfos.push(data);
+            }
+        });
+        $name.html(tagName);
+        ele.parent().css("display",'none');
+        e.stopPropagation();
+    });
 }

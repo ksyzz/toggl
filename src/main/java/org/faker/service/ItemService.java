@@ -2,9 +2,12 @@ package org.faker.service;
 
 
 import org.faker.entity.Item;
+import org.faker.entity.Project;
+import org.faker.entity.Tag;
 import org.faker.repository.ItemRepository;
 import org.faker.repository.ProjectRepository;
 import org.faker.repository.TagRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +24,12 @@ public class ItemService {
     ProjectRepository projectRepository;
     @Resource
     TagRepository tagRepository;
+    @Autowired
+    ProjectService projectService;
+    @Autowired
+    TagService tagService;
+    @Autowired
+    TimeService timeService;
 
     /**
      * 创建Item
@@ -28,12 +37,17 @@ public class ItemService {
      * @return
      */
     public Item createItem(String content, String projectName, String tagName){
-        Item item = new Item();
+        Project project = projectRepository.findByProjectName(projectName);
+        if (project == null)
+            project = projectService.addProject(projectName);
+        Tag tag = tagRepository.findByTagName(tagName);
+        if (tag == null)
+            tag = tagService.addTag(tagName);
+         Item item = new Item();
         item.setContent(content);
-        if (projectName != null)
-            item.setProject(projectRepository.findByProjectName(projectName));
-        if (projectName != null)
-            item.setTag(tagRepository.findByTagName(tagName));
+        item.setProject(project);
+        item.setTime_length(0);
+        item.setTag(tag);
         itemRepository.save(item);
         return item;
     }
@@ -43,28 +57,26 @@ public class ItemService {
      * @param id
      */
     public void deleteItem(int id){
+        Item item = itemRepository.findOne(id);
+        timeService.deleteByItem(item);
         itemRepository.delete(id);
     }
 
     /**
      * 修改item
-     * @param itemId
-     * @param content
-     * @param projectId
-     * @param tagId
      * @return
      */
-    public Item modifyItem(int itemId, String content, Integer projectId, Integer tagId){
+    public Item modifyItem(int itemId, String content, String projectName, String tagName){
         Item item = itemRepository.findOne(itemId);
         if (item == null){
             throw new NullPointerException();
         }
         if (content != null)
             item.setContent(content);
-        if (projectId != null)
-            item.setProject(projectRepository.findOne(projectId));
-        if (tagId != null)
-            item.setTag(tagRepository.findOne(tagId));
+        if (projectName != null)
+            item.setProject(projectRepository.findByProjectName(projectName));
+        if (tagName != null)
+            item.setTag(tagRepository.findByTagName(tagName));
         itemRepository.save(item);
         return item;
     }

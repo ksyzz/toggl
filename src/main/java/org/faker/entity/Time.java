@@ -10,15 +10,24 @@ import java.util.Date;
 @Table(name = "time")
 public class Time {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date startTime;
     private Date endTime;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private int length;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REMOVE)
     private Item item;
 
     public int getId() {
         return id;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public void setId(int id) {

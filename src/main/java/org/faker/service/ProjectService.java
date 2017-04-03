@@ -22,9 +22,13 @@ public class ProjectService {
      * @return
      */
     public Project addProject(String projectName){
-        Project project = new Project();
-        project.setProjectName(projectName);
-        projectRepository.save(project);
+        Project project = projectRepository.findByProjectName(projectName);
+        if (project == null){
+            project = new Project();
+            project.setProjectName(projectName);
+            projectRepository.save(project);
+        }
+
         return project;
     }
 

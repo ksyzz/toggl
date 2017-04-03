@@ -12,15 +12,22 @@ import java.util.List;
 @Table(name = "item")
 public class Item {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String content;
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Time> times;
+    private int time_length;
     @ManyToOne
     private Project project;
     @ManyToOne
     private Tag tag;
+
+    public int getTime_length() {
+        return time_length;
+    }
+
+    public void setTime_length(int time_length) {
+        this.time_length = time_length;
+    }
 
     public String getContent() {
         return content;
@@ -39,13 +46,6 @@ public class Item {
         this.id = id;
     }
 
-    public List<Time> getTimes() {
-        return times;
-    }
-
-    public void setTimes(List<Time> times) {
-        this.times = times;
-    }
 
     public Project getProject() {
         return project;

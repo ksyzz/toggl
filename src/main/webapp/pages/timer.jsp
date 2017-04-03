@@ -42,10 +42,10 @@
                     <div id="tagList" style="text-align: left; width: inherit"></div>
                 </div>
             </div>
-            <div class="subtop" id="countTime"></div>
+            <div class="subtop"><p id="countTime">0:00:00</p></div>
             <div class="subtop"><img class="img" id="img" src="/image/start.jpg"> </div>
         </div>
-        <div style="border: none; font-size:40px;color:blue;text-align: center; font-style: italic;font-family: 楷体;background-color: aliceblue;height: 60px">Item list</div>
+        <div style=" font-size:40px;color:blue;border-bottom:1px black;text-align: center;font-family: 楷体;background-color: aliceblue;height: 60px">Item list</div>
         <div id="itemList" class="other">
             <c:if test="${not empty itemInfos}">
                 <c:forEach items="${itemInfos}" var="itemInfo" >
@@ -67,6 +67,9 @@
                                 <div style="text-align: left; width: inherit"></div>
                             </div>
                         </div>
+                        <div class="subtop"><p id="interval${itemInfo.itemId}"></p></div>
+                        <div class="subtop"><button class="continue" style="color: green">|></button></div>
+                        <div class="subtop"><button class="delete">Delete</button></div>
                     </div>
                 </c:forEach>
             </c:if>

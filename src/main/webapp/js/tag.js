@@ -54,9 +54,7 @@ $(function () {
         $('.project').hide();
         e.stopPropagation();
     });
-    // $('.subtopTag').click(function (e) {
-    //
-    // });
+
 
 })
 
@@ -80,6 +78,7 @@ function listTags(data, ele) {
     var tagName = "";
     var text = "";
     var $name = ele.parent().prev().children();
+    var id = ele.parent().parent().attr("id");
     for (var i = 0; i < data.length; i++){
         tagName = data[i].tagName;
         text = text + "<li><input type='button' class='tagName' value=\""+tagName+"\"></li>";
@@ -88,7 +87,20 @@ function listTags(data, ele) {
     ele.html(text);
     // onclick='createProject()'
     $('.tagName').click(function (e) {
-        $name.html($(this).val());
+        var tag = $(this).val();
+        var project = $name.parent().parent().prev().children().children().html();
+        var content = $name.parent().parent().parent().children().children().val();
+        $name.html(tag);
+        modify(id, content, project, tag);
+        $.ajax({
+            url:"/item/modify/normal/"+id,
+            data:{tagName:tag},
+            type:"POST",
+            dataType:"json",
+            success:function (data) {
+                itemInfos.push(data);
+            }
+        })
         ele.parent().css("display",'none');
         ele.prev().val("");
         e.stopPropagation();

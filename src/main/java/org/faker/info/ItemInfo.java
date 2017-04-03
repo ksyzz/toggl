@@ -2,8 +2,6 @@ package org.faker.info;
 
 import org.faker.entity.Item;
 
-import java.util.Date;
-
 /**
  * 记录信息
  * Created by fengqian on 2017/3/23.
@@ -11,14 +9,14 @@ import java.util.Date;
 public class ItemInfo {
     private int itemId;
     private String content;
-    private Date pauseTime;
-    private Date continueTime;
     private TagInfo tagInfo;
+    private int time_length;
     private ProjectInfo projectInfo;
-
     public ItemInfo(Item item) {
         this.itemId = item.getId();
+        this.time_length = item.getTime_length();
         this.content = item.getContent();
+//        this.interval = item.getInterval();
         if (item.getProject() != null)
             this.projectInfo = new ProjectInfo(item.getProject());
         if (item.getTag() != null)
@@ -41,21 +39,6 @@ public class ItemInfo {
         this.content = content;
     }
 
-    public Date getPauseTime() {
-        return pauseTime;
-    }
-
-    public void setPauseTime(Date pauseTime) {
-        this.pauseTime = pauseTime;
-    }
-
-    public Date getContinueTime() {
-        return continueTime;
-    }
-
-    public void setContinueTime(Date continueTime) {
-        this.continueTime = continueTime;
-    }
 
     public TagInfo getTagInfo() {
         return tagInfo;
@@ -71,5 +54,13 @@ public class ItemInfo {
 
     public void setProjectInfo(ProjectInfo projectInfo) {
         this.projectInfo = projectInfo;
+    }
+
+    public int getTime_length() {
+        return time_length;
+    }
+
+    public void setTime_length(int time_length) {
+        this.time_length = time_length;
     }
 }

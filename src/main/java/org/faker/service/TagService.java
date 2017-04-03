@@ -22,9 +22,13 @@ public class TagService {
      * @return
      */
     public Tag addTag(String tagName){
-        Tag tag = new Tag();
-        tag.setTagName(tagName);
-        tagRepository.save(tag);
+        Tag tag = tagRepository.findByTagName(tagName);
+        if (tag == null){
+            tag = new Tag();
+            tag.setTagName(tagName);
+            tagRepository.save(tag);
+        }
+
         return tag;
     }
 

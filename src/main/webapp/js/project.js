@@ -32,16 +32,7 @@ $(function () {
     })
     $("#project").click(function (e) {
         $('.project').hide(); /////////////////////////////////
-        // if (projectInfos == ""){
-        //     $.ajax({
-        //         url:"/project/get/all",
-        //         type:'GET',
-        //         dataType:"json",
-        //         success:function (data) {
-        //             projectInfos = data;
-        //         }
-        //     });
-        // }
+
         listProjects(projectInfos, $("#projectList"));
         $("#projectMessage").show();
         $(".tag").hide();//////////////////
@@ -85,6 +76,20 @@ function listProjects(data, ele) {
     ele.html(text);
     // onclick='createProject()'
     $('.projectName').click(function (e) {
+        var project = $(this).val();
+        var tag = $name.parent().parent().next().children().children().html();
+        var content = $name.parent().parent().parent().children().children().val();
+        $name.html(project);
+        modify(id, content, project, tag);
+        $.ajax({
+            url:"/item/modify/normal/"+id,
+            data:{projectName:project},
+            type:"POST",
+            dataType:"json",
+            success:function (data) {
+                itemInfos.push(data);
+            }
+        })
         $name.html($(this).val());
         ele.parent().css("display",'none');
         ele.prev().val("");

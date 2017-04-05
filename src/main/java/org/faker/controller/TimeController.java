@@ -55,7 +55,7 @@ public class TimeController {
             @RequestParam("startTime") String startTime,
             @RequestParam("endTime") String endTime
     ) throws ParseException {
-        DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date time1 = fmt.parse(startTime);
         Date time2 = fmt.parse(endTime);
         Date start = time1.getTime() < time2.getTime() ? time1 : time2;

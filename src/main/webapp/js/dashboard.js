@@ -2,15 +2,31 @@
  * Created by fengqian on 2017/4/4 0004.
 */
 function startDate() {
-laydate({
-    elem: '#startTime'
-})
+// laydate({
+//     elem: '#startTime'
+// })
+    jeDate({
+        dateCell:"#startTime",
+        format:"YYYY-MM-DD hh:mm:ss",
+        isinitVal:true,
+        isTime:true, //isClear:false,
+
+    })
 }
 function endDate() {
-laydate({
-    elem: '#endTime'
-})
+// laydate({
+//     elem: '#endTime'
+// })
+    jeDate({
+        dateCell:"#endTime",
+        format:"YYYY-MM-DD hh:mm:ss",
+        isinitVal:true,
+        isTime:true, //isClear:false,
+
+    })
 }
+
+
 function getdistribution() {
     var start = $("#startTime").val();
     var end = $("#endTime").val();

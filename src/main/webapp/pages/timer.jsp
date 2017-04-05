@@ -16,6 +16,8 @@
     <script src="../js/tag.js" type="text/javascript"></script>
     <script src="../js/item.js" type="text/javascript"></script>
     <script src="../js/timers.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../jedate/jedate.js"></script>
+
     <link rel="stylesheet" href="../css/toggl.css" type="text/css">
     <script type="text/html" id="model">
         <div class="item" id="{{itemId}}">
@@ -67,8 +69,22 @@
                     <div id="tagList" style="text-align: left; width: inherit"></div>
                 </div>
             </div>
-            <div class="subtop"><p id="countTime">0:00:00</p></div>
-            <div class="subtop"><img class="img" id="img" src="/image/start.jpg"> </div>
+            <div class="subtop" style="width: 25%" id="auto">
+                <div class="subtop"  style="width: 45%" ><p id="countTime">0:00:00</p></div>
+                <div class="subtop"  style="width: 45%"><img class="img" id="img" src="/image/start.jpg"> </div>
+            </div>
+            <div class="subtop" style="width: 25%;display: none" id="manual" >
+                <div class="subtop" style="width: 60%">
+                    <input id="beginDate" type="text" style="height: 50%;float: left; width: 100%" placeholder="beginDate">
+
+                    <input id="endDate" type="text" style="height: 50%;float: left; width: 100%" placeholder="endDate">
+                </div>
+                <div class="subtop" style="width: 40%; height: 100%"><img class="img" id="confirm" style="width:70px;height: 68px" src="/image/confirm.jpg"></div>
+            </div>
+            <div class="subtop" style="width: 5%">
+                <button class="auto">Auto</button>
+                <button class="manual">Manual</button>
+            </div>
         </div>
         <div style=" font-size:40px;color:blue;border-bottom:1px black;text-align: center;font-family: 楷体;background-color: aliceblue;height: 60px">Item list</div>
         <div id="itemList" class="other">

@@ -1,8 +1,6 @@
 package org.faker;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,13 +8,17 @@ import java.util.Date;
  */
 public class Main {
     public static void main(String[] args) throws ParseException {
-        String d = "2017-04-04";
-        String s = "2017-04-03";
-        DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
-        Date dated = fmt.parse(d);
-        Date dates = fmt.parse(s);
-        if (dated.getTime()>dates.getTime()){
-            System.out.println(dated);
-        }
+//        DateFormat fmt =new SimpleDateFormat("yyyy-MM-dd");
+//        String d = "2017-04-04";
+//        String s = "2017-04-03";
+//        Date dated = fmt.parse(d);
+//        Date dates = fmt.parse(s);
+        Date date = new Date();
+        System.out.println(date);
+        System.out.println(date.getDay());
+        long a = date.getTime();
+        Date b = new Date(a);
+        System.out.println(System.currentTimeMillis());
+        System.out.println(a);
     }
 }

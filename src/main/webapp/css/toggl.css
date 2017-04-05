@@ -65,6 +65,7 @@
 .subtop,.subtopProject,.subtopTag {
     float: left;
     width: 10%;
+    height: 100%;
     font-size: 18px;
     text-align: center;
     bottom: 0px;
@@ -159,18 +160,36 @@ p{
 .date{
     border: 1px greenyellow;
     height: 50px;
-    width: 30%;
+    left:25%;
+    width: 25%;
     font-size: 20px;
+    background-color: #ECF4FB;
+    border: 1px #ECF4FB;
 }
 
 tr{
     background-color: ghostwhite;
+    font-size: 15px;
+    border: 1px lightsalmon;
 }
 th{
     width: 150px;
-    background-color: greenyellow;
+    height: 50px;
+    font-size: 15px;
+    border: 1px lightsalmon;
+
 }
 td{
     width: 150px;
-    background-color: #00E8D7;
+    height: 50px;
+    font-size: 15px;
+    border: 1px lightsalmon;
+
+}
+.auto,.manual{
+    width: 100%;
+    height: 50%;
+    background-color: inherit;
+    color: springgreen;
+    border: none;
 }

@@ -10,7 +10,7 @@ public class DistributionInfo {
 
     public DistributionInfo(String projectName, int count) {
         this.projectName = projectName;
-        this.length = count/360+":"+count/600+""+count/60%10+":"+count%60/10+""+count%10;
+        this.length = count/3600+":"+count%3600/600+""+count%3600/60%10+":"+count%60/10+""+count%10;
     }
 
     public String getProjectName() {

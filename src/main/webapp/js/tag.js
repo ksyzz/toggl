@@ -32,16 +32,7 @@ $(function () {
     })
     $("#tag").click(function (e) {
         $('.tag').hide(); /////////////////////////////////
-        // if (projectInfos == ""){
-        //     $.ajax({
-        //         url:"/project/get/all",
-        //         type:'GET',
-        //         dataType:"json",
-        //         success:function (data) {
-        //             projectInfos = data;
-        //         }
-        //     });
-        // }
+
         listTags(tagInfos, $("#tagList"));
         $("#tagMessage").show();
         $(".project").hide();//////////////////
@@ -78,7 +69,6 @@ function listTags(data, ele) {
     var tagName = "";
     var text = "";
     var $name = ele.parent().prev().children();
-    var id = ele.parent().parent().attr("id");
     for (var i = 0; i < data.length; i++){
         tagName = data[i].tagName;
         text = text + "<li><input type='button' class='tagName' value=\""+tagName+"\"></li>";
@@ -90,22 +80,27 @@ function listTags(data, ele) {
         var tag = $(this).val();
         var project = $name.parent().parent().prev().children().children().html();
         var content = $name.parent().parent().parent().children().children().val();
+        var id = $name.parent().parent().parent().attr("id");
         $name.html(tag);
-        modify(id, content, project, tag);
-        $.ajax({
-            url:"/item/modify/normal/"+id,
-            data:{tagName:tag},
-            type:"POST",
-            dataType:"json",
-            success:function (data) {
-                itemInfos.push(data);
-            }
-        })
+        if (ele.attr("id") != "tagList"){
+            modify(id, content, project, tag, $name.parent());
+            $.ajax({
+                url:"/item/modify/normal/"+id,
+                data:{tagName:tag},
+                type:'POST',
+                dataType:"json",
+                success:function (data) {
+                    itemInfos.push(data);
+                }
+            })
+        }
+
         ele.parent().css("display",'none');
         ele.prev().val("");
         e.stopPropagation();
     });
     $('.create').click(function (e) {
+        var id = $name.parent().parent().parent().attr("id");
         var tagName = prompt("Please input tagName:");
         for (var i = 0; i < tagInfos.length; i++){
             if (tagInfos[i].tagName == tagName)
@@ -114,6 +109,7 @@ function listTags(data, ele) {
                 return;
             }
         }
+
         $.ajax({
             url:"/tag/add",
             type:"POST",
@@ -121,9 +117,26 @@ function listTags(data, ele) {
             dataType:"json",
             success:function(data){
                 tagInfos.push(data);
+                $name.html(tagName);
+                if (ele.attr("id") != "tagList"){
+                    for (var i = 0; i < itemInfos.length; i++){
+                        if (itemInfos[i].itemId == id){
+                            itemInfos.splice(i,1);
+                        }
+                    }
+                    $.ajax({
+                        url:"/item/modify/normal/"+id,
+                        data:{tagName:tagName},
+                        type:'POST',
+                        dataType:"json",
+                        success:function (data) {
+                            itemInfos.push(data);
+                        }
+                    })
+                }
             }
         });
-        $name.html(tagName);
+
         ele.parent().css("display",'none');
         e.stopPropagation();
     });

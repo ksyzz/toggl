@@ -15,7 +15,7 @@ public class Time {
     private Date startTime;
     private Date endTime;
     private int length;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false)
     private Item item;
 
     public int getId() {

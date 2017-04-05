@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ import java.util.List;
 public interface TimeRepository extends JpaSpecificationExecutor<Time>, JpaRepository<Time, Integer>{
     @Query("select t from Time t where t.item = ?")
     List<Time> getTimesByItem(Item item);
+    @Query("select t from Time t where t.startTime > ?1 and t.endTime <?2")
+    List<Time> findTimeBetweenSpecificaDate(Date startDate, Date endDate);
 }

@@ -16,15 +16,40 @@
     <script src="../js/tag.js" type="text/javascript"></script>
     <script src="../js/item.js" type="text/javascript"></script>
     <script src="../js/timers.js" type="text/javascript"></script>
-
     <link rel="stylesheet" href="../css/toggl.css" type="text/css">
+    <script type="text/html" id="model">
+        <div class="item" id="{{itemId}}">
+            <div class="text" style="width: 40%;">
+                <input class="itemtext" type="text" placeholder="Add Task Description" value="{{content}}">
+            </div>
+            <div class="subtopProject">
+                <p><a>{{projectInfo.projectName}}</a></p>
+                <div class="project" >
+                    <input type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value, this)">
+                    <div style="text-align: left; width: inherit"></div>
+                </div>
+            </div>
+            <div class="subtopTag">
+                <p><a>{{tagInfo.tagName}}</a></p>
+                <div class="tag" >
+                    <input type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value, this)">
+                    <div style="text-align: left; width: inherit"></div>
+                </div>
+            </div>
+            <div class="subtop"><p id="interval{{itemId}}"></p></div>
+            <div class="subtop"><button class="continue" style="color: green">|></button></div>
+            <div class="subtop"><button class="delete">Delete</button></div>
+            <div class="subtop" style="width: 5%"><input type="button" class="dylist" value="show"></div>
+        </div>
+        <div class="times"></div>
+</script>
 </head>
-<body style="background-color: rgba(1, 0, 12, 0.89)">
+<body>
     <div class="left" id="tabs">
         Toggl<br/>
         <ul>
-            <li><a style="color:white" href="/">Timer</a></li>
-            <li><a style="color:white" href="/dashboard">Dashboard</a></li>
+            <li><a href="/">Timer</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
         </ul>
     </div>
     <div class="right" id="timer">
@@ -51,7 +76,7 @@
                 <c:forEach items="${itemInfos}" var="itemInfo" >
                     <div class="item" id="${itemInfo.itemId}">
                         <div class="text" style="width: 40%;">
-                            <input class="itemtext" type="text" value="${itemInfo.content}">
+                            <input class="itemtext" type="text" placeholder="Add Task Description" value="${itemInfo.content}">
                         </div>
                         <div class="subtopProject">
                             <p><a>${itemInfo.projectInfo.projectName}</a></p>
@@ -70,9 +95,12 @@
                         <div class="subtop"><p id="interval${itemInfo.itemId}"></p></div>
                         <div class="subtop"><button class="continue" style="color: green">|></button></div>
                         <div class="subtop"><button class="delete">Delete</button></div>
+                        <div class="subtop" style="width: 5%"><input type="button" class="listTime" value="show"></div>
                     </div>
+                    <div class="times"></div>
                 </c:forEach>
             </c:if>
+
         </div>
     </div>
 </body>

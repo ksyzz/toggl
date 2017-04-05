@@ -3,15 +3,19 @@
     position: fixed;
     color:white;
     width: 12%;
+    top:0px;
+    left: 0px;
     height: 100%;
     font-size: 20px;
     line-height: 30px;
+    background-color: black;
 }
 .right{
     float: right;
     position: absolute;
     top: 0px;
     right: 0px;
+    bottom: 0px;
     width: 88%;
     height: 100%;
     background-color: white;
@@ -30,7 +34,7 @@
     width: 100%;
     height: 100%;
     font-size: 20px;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
 }
 .text{
     float: left;
@@ -48,7 +52,7 @@
     top: 70px;
     width: 200px;
     display: none;
-    background-color: lightgreen;
+    background-color: bisque;
 }
 .projectName,.tagName{
     color: midnightblue;
@@ -117,4 +121,56 @@ p{
     background-color: inherit;
     font-weight: bold;
     color:red;
+}
+.listTime, .dylist{
+    height: 100%;
+    width: 100%;
+    bottom: 0px;
+    color: greenyellow;
+    border:none;
+    background-color: inherit;
+    font-size: 20px;
+}
+.times{
+    position: relative;
+    width: 100%;
+    display: none;
+    background-color: inherit;
+    left: 5%;
+
+}
+.time{
+    position: relative;
+    float: left;
+    width: 100%;
+    background-color: inherit;
+    border-bottom: inherit;
+    height: 40px;
+    line-height: 40px;
+    background-color: lightgreen;
+}
+.subtime{
+    position: relative;
+    float: left;
+    height: inherit;
+    font-size: 15px;
+    width: 30%;
+}
+.date{
+    border: 1px greenyellow;
+    height: 50px;
+    width: 30%;
+    font-size: 20px;
+}
+
+tr{
+    background-color: ghostwhite;
+}
+th{
+    width: 150px;
+    background-color: greenyellow;
+}
+td{
+    width: 150px;
+    background-color: #00E8D7;
 }

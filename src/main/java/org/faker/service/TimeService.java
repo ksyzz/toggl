@@ -2,13 +2,13 @@ package org.faker.service;
 
 import org.faker.entity.Item;
 import org.faker.entity.Time;
+import org.faker.info.DistributionInfo;
 import org.faker.repository.ItemRepository;
 import org.faker.repository.TimeRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by fengqian on 2017/4/3 0003.
@@ -57,6 +57,12 @@ public class TimeService {
         timeRepository.delete(times);
     }
 
+    /**
+     * 合并两条item
+     * @param modifyId
+     * @param targetId
+     * @return
+     */
     public List<Time> modifyItem(int modifyId, int targetId){
         Item modifyItem = itemRepository.findOne(modifyId);
         Item targetItem = itemRepository.findOne(targetId);
@@ -65,5 +71,33 @@ public class TimeService {
             timeRepository.save(time);
         });
         return getAll();
+    }
+
+    /**
+     * 获取时间分布
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    public List<DistributionInfo> getTimeDistribution(Date startTime, Date endTime){
+        List<Time> times = timeRepository.findTimeBetweenSpecificaDate(startTime, endTime);
+        Map<String, Integer> maps = new HashMap<>();
+
+        times.forEach(time -> {
+            String projectName = time.getItem().getProject().getProjectName();
+            if (maps.containsKey(projectName)){
+                int length = time.getLength()+maps.get(projectName);
+                maps.put(projectName, length);
+            }else {
+                maps.put(projectName, time.getLength());
+            }
+        });
+        List<DistributionInfo> distributionInfos = new ArrayList<>();
+        for(Map.Entry<String, Integer> entry:maps.entrySet())
+        {
+            DistributionInfo distributionInfo = new DistributionInfo(entry.getKey(), entry.getValue());
+            distributionInfos.add(distributionInfo);
+        }
+        return distributionInfos;
     }
 }

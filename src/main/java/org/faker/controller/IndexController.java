@@ -36,4 +36,8 @@ public class IndexController {
         modelMap.addAttribute("itemInfos", itemInfos);
         return "timer";
     }
+    @RequestMapping("/dashboard")
+    public String dashboard(){
+        return "dashboard";
+    }
 }

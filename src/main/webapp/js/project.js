@@ -15,22 +15,22 @@ function getProjectData() {
     });
 }
 $(function () {
-    $("a").hover(
+    $("a").on('hover',(
         function () {
             $(this).css("color", 'red');
         },
         function () {
             $(this).css("color", 'green');
         }
-    )
-    $(document).click(function () {
-        $(".project").hide(); /////////////////////////
+    ))
+    $(document).on('click',function () {
+        $(".project").hide();
         $("#project_condition").val("");
     });
-    $("#projectMessage").click(function (e) {
+    $("#projectMessage").on('click',function (e) {
         e.stopPropagation();
     })
-    $("#project").click(function (e) {
+    $("#project").on('click',function (e) {
         $('.project').hide(); /////////////////////////////////
 
         listProjects(projectInfos, $("#projectList"));
@@ -38,7 +38,7 @@ $(function () {
         $(".tag").hide();//////////////////
         e.stopPropagation();
     });
-    $('.subtopProject').click(function (e) {
+    $('.subtopProject').on('click',function (e) {
         $('.project').hide();
         listProjects(projectInfos, $(this).children("div").children("div"));
         $(this).children("div").show();
@@ -75,27 +75,32 @@ function listProjects(data, ele) {
     text = text + "<button class='create'>+Create new project</button>";
     ele.html(text);
     // onclick='createProject()'
-    $('.projectName').click(function (e) {
+    $('.projectName').on('click',function (e) {
         var project = $(this).val();
         var tag = $name.parent().parent().next().children().children().html();
         var content = $name.parent().parent().parent().children().children().val();
+        var id = $name.parent().parent().parent().attr("id");
         $name.html(project);
-        modify(id, content, project, tag);
-        $.ajax({
-            url:"/item/modify/normal/"+id,
-            data:{projectName:project},
-            type:"POST",
-            dataType:"json",
-            success:function (data) {
-                itemInfos.push(data);
-            }
-        })
-        $name.html($(this).val());
+        if (ele.attr("id") != "projectList"){
+            modify(id, content, project, tag, $name.parent());
+            $.ajax({
+                url:"/item/modify/normal/"+id,
+                data:{projectName:project},
+                type:'POST',
+                dataType:"json",
+                success:function (data) {
+                    itemInfos.push(data);
+                }
+            })
+        }
+
         ele.parent().css("display",'none');
         ele.prev().val("");
         e.stopPropagation();
     });
-    $('.create').click(function (e) {
+    $('.create').on('click',function (e) {
+        var id = $name.parent().parent().parent().attr("id");
+
         var projectName = prompt("Please input projectName:");
         for (var i = 0; i < projectInfos.length; i++){
             if (projectInfos[i].projectName == projectName)
@@ -111,10 +116,31 @@ function listProjects(data, ele) {
             dataType:"json",
             success:function(data){
                 projectInfos.push(data);
+                $name.html(projectName);
+                if (ele.attr("id") != "projectList"){
+                    for (var i = 0; i < itemInfos.length; i++){
+                        if (itemInfos[i].itemId == id){
+                            itemInfos.splice(i,1);
+                        }
+                    }
+                    $.ajax({
+                        url:"/item/modify/normal/"+id,
+                        data:{projectName:projectName},
+                        type:'POST',
+                        dataType:"json",
+                        success:function (data) {
+                            itemInfos.push(data);
+                        }
+                    })
+                }
             }
         });
-        $name.html(projectName);
+
         ele.parent().css("display",'none');
         e.stopPropagation();
     });
 }
+// function test1() {
+//
+//     $("#mustacher").html(Mustache.render($("#model").html(), itemInfos[0]));
+// }

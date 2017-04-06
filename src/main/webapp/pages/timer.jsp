@@ -15,6 +15,7 @@
     <script src="../js/project.js" type="text/javascript"></script>
     <script src="../js/tag.js" type="text/javascript"></script>
     <script src="../js/item.js" type="text/javascript"></script>
+    <script src="../js/jedate/jedate.js" type="text/javascript"></script>
     <script src="../js/timers.js" type="text/javascript"></script>
     <script type="text/javascript" src="../jedate/jedate.js"></script>
 
@@ -25,20 +26,20 @@
                 <input class="itemtext" type="text" placeholder="Add Task Description" value="{{content}}">
             </div>
             <div class="subtopProject">
-                <p><a>{{projectInfo.projectName}}</a></p>
+                <p class="p"><a style="position:relative;top:30%">{{projectInfo.projectName}}</a></p>
                 <div class="project" >
                     <input type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value, this)">
                     <div style="text-align: left; width: inherit"></div>
                 </div>
             </div>
             <div class="subtopTag">
-                <p><a>{{tagInfo.tagName}}</a></p>
+                <p class="p"><a style="position:relative;top:30%">{{tagInfo.tagName}}</a></p>
                 <div class="tag" >
                     <input type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value, this)">
                     <div style="text-align: left; width: inherit"></div>
                 </div>
             </div>
-            <div class="subtop"><p id="interval{{itemId}}"></p></div>
+            <div class="subtop"><p class="p" style="top:30%;position:relative;height:70%" id="interval{{itemId}}"></p></div>
             <div class="subtop"><button class="continue" style="color: green">|></button></div>
             <div class="subtop"><button class="delete">Delete</button></div>
             <div class="subtop" style="width: 5%"><input type="button" class="dylist" value="show"></div>
@@ -50,27 +51,27 @@
     <div class="left" id="tabs">
         Toggl<br/>
         <ul>
-            <li><a href="/">Timer</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
+            <li ><a  href="/" class="a">Timer</a></li>
+            <li ><a  href="/dashboard" class="a">Dashboard</a></li>
         </ul>
     </div>
     <div class="right" id="timer">
         <div class="top">
             <div class="text"><input type="text" id="content" class="text" style="width: 100%" placeholder="   What are you working on"/></div>
-            <div class="subtop"><p><a id="project" >+Project/task</a></p>
+            <div class="subtop"><p class="p"><a style="position:relative;top:30%" id="project" >+Project/task</a></p>
                 <div class="project" id="projectMessage">
                     <input id="project_condition" type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value, this)">
                     <div id="projectList" style="text-align: left; width: inherit"></div>
                 </div>
             </div>
-            <div class="subtop"><p><a id="tag" >+Tag</a></p>
+            <div class="subtop"><p class="p"><a style="position:relative;top:30%" id="tag" >+Tag</a></p>
                 <div class="tag" id="tagMessage">
                     <input id="tag_condition" type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value, this)">
                     <div id="tagList" style="text-align: left; width: inherit"></div>
                 </div>
             </div>
             <div class="subtop" style="width: 25%" id="auto">
-                <div class="subtop"  style="width: 45%" ><p id="countTime">0:00:00</p></div>
+                <div class="subtop"  style="width: 45%" ><p style="top:30%;position:relative;height:70%" class="p" id="countTime">0:00:00</p></div>
                 <div class="subtop"  style="width: 45%"><img class="img" id="img" src="/image/start.jpg"> </div>
             </div>
             <div class="subtop" style="width: 25%;display: none" id="manual" >
@@ -95,20 +96,20 @@
                             <input class="itemtext" type="text" placeholder="Add Task Description" value="${itemInfo.content}">
                         </div>
                         <div class="subtopProject">
-                            <p><a>${itemInfo.projectInfo.projectName}</a></p>
+                            <p class="p"><a style="position:relative;top:30%">${itemInfo.projectInfo.projectName}</a></p>
                             <div class="project" >
                                 <input type="text" placeholder="Find Project" style="height: 35px;font-size: 15px; width: 200px;" oninput="search(this.value, this)">
                                 <div style="text-align: left; width: inherit"></div>
                             </div>
                         </div>
                         <div class="subtopTag">
-                            <p><a>${itemInfo.tagInfo.tagName}</a></p>
+                            <p class="p"><a style="position:relative;top:30%">${itemInfo.tagInfo.tagName}</a></p>
                             <div class="tag" >
                                 <input type="text" placeholder="Find Tag" style="height: 35px;font-size: 15px; width: 200px;" oninput="searchTag(this.value, this)">
                                 <div style="text-align: left; width: inherit"></div>
                             </div>
                         </div>
-                        <div class="subtop"><p id="interval${itemInfo.itemId}"></p></div>
+                        <div class="subtop"><p class="p" style="top:30%;position:relative;height:70%" id="interval${itemInfo.itemId}"></p></div>
                         <div class="subtop"><button class="continue" style="color: green">|></button></div>
                         <div class="subtop"><button class="delete">Delete</button></div>
                         <div class="subtop" style="width: 5%"><input type="button" class="listTime" value="show"></div>

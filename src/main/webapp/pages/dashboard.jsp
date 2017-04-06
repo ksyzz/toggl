@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/toggl.css" type="text/css">
     <script src="../js/mustache.js" type="text/javascript"></script>
     <script type="text/javascript" src="../jedate/jedate.js"></script>
+    <script src="../js/jedate/jedate.js" type="text/javascript"></script>
 
     <script type="text/html" id="time_distribution">
         <table >
@@ -24,14 +25,14 @@
             {{/list}}
             </tbody>
         </table>
-</script>
+    </script>
 </head>
 <body>
 <div class="left">
     Toggl<br/>
     <ul>
-        <li><a href="/">Timer</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
+        <li ><a href="/" class="a">Timer</a></li>
+        <li ><a href="/dashboard" class="a">Dashboard</a></li>
     </ul>
 </div>
 <div class="right" id="timer">

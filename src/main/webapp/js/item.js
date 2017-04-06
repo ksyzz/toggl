@@ -162,7 +162,7 @@ $(function () {
                     startDate = startDate.getMonth()+1+"-"+startDate.getDate()+" "+startDate.getHours()+":"+startDate.getMinutes()+":"+startDate.getSeconds();
                     endDate = new Date(timeInfos[i].endTime);
                     endDate = endDate.getMonth()+1+"-"+endDate.getDate()+" "+endDate.getHours()+":"+endDate.getMinutes()+":"+endDate.getSeconds();
-                    text=text+"<div class='time'><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div> </div>"
+                    text=text+"<div class='time' ><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div> </div>"
                 }
             }
             $(this).parent().parent().next().show();
@@ -362,7 +362,7 @@ function addTime(itemId, content, project, tag, length, timestamp) {
                                 startDate = startDate.getMonth()+1+"-"+startDate.getDate()+" "+startDate.getHours()+":"+startDate.getMinutes()+":"+startDate.getSeconds();
                                 endDate = new Date(timeInfos[i].endTime);
                                 endDate = endDate.getMonth()+1+"-"+endDate.getDate()+" "+endDate.getHours()+":"+endDate.getMinutes()+":"+endDate.getSeconds();
-                                text=text+"<div class='time'><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div> </div>"
+                                text=text+"<div class='time' id='time'><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div><div class='subtime' style='width: 10%'><button style='border: none'>Delete</button>/div> </div>"
                             }
                         }
                         $(this).parent().parent().next().html(text);
@@ -373,10 +373,10 @@ function addTime(itemId, content, project, tag, length, timestamp) {
 
                 })
                 $("a").hover(function () {
-                        $(this).css("color", 'red');
+                        $(this).css("color", 'green');
                     },
                     function () {
-                        $(this).css("color", 'green');
+                        $(this).css("color", 'gray');
                     }
                 )
                 $.ajax({

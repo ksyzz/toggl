@@ -81,13 +81,11 @@
     border: none;
 }
 a{
-    color:green;
+    color:gray;
     bottom: 0px;
     font-weight: bold;
 }
-p{
-    vertical-align: center;
-}
+
 .item{
     position: relative;
     float: left;
@@ -192,4 +190,7 @@ td{
     background-color: inherit;
     color: springgreen;
     border: none;
+}
+.p{
+    height: 100%;
 }

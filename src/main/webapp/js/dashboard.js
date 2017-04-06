@@ -2,9 +2,6 @@
  * Created by fengqian on 2017/4/4 0004.
 */
 function startDate() {
-// laydate({
-//     elem: '#startTime'
-// })
     jeDate({
         dateCell:"#startTime",
         format:"YYYY-MM-DD hh:mm:ss",
@@ -14,9 +11,7 @@ function startDate() {
     })
 }
 function endDate() {
-// laydate({
-//     elem: '#endTime'
-// })
+
     jeDate({
         dateCell:"#endTime",
         format:"YYYY-MM-DD hh:mm:ss",
@@ -25,7 +20,6 @@ function endDate() {
 
     })
 }
-
 
 function getdistribution() {
     var start = $("#startTime").val();
@@ -43,5 +37,11 @@ function getdistribution() {
         })
     }
 }
-
+$(function () {
+    $(".a").hover(function () {
+        $(this).css('color', 'white')
+    }, function () {
+        $(this).css('color', 'yellow')
+    })
+})
 

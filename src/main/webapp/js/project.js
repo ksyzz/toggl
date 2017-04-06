@@ -17,10 +17,10 @@ function getProjectData() {
 $(function () {
     $("a").on('hover',(
         function () {
-            $(this).css("color", 'red');
+            $(this).css("color", 'green');
         },
         function () {
-            $(this).css("color", 'green');
+            $(this).css("color", 'gray');
         }
     ))
     $(document).on('click',function () {

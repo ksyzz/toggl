@@ -62,4 +62,11 @@ public class TimeController {
         Date end = time1.getTime() < time2.getTime() ? time2 : time1;
         return timeService.getTimeDistribution(start, end);
     }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public void deleteTime(
+            @PathVariable("id") int id
+    ){
+        timeService.deleteById(id);
+    }
 }

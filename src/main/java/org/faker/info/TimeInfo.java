@@ -7,15 +7,25 @@ import org.faker.entity.Time;
  * Created by fengqian on 2017/4/3 0003.
  */
 public class TimeInfo {
+    private int timeId;
     private long startTime;
     private long endTime;
     private int length;
     private int itemId;
     public TimeInfo(Time time) {
+        this.timeId = time.getId();
         this.startTime = time.getStartTime().getTime();
         this.endTime = time.getEndTime().getTime();
         this.length = time.getLength();
         this.itemId = time.getItem().getId();
+    }
+
+    public int getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(int timeId) {
+        this.timeId = timeId;
     }
 
     public long getStartTime() {

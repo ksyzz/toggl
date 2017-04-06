@@ -100,4 +100,8 @@ public class TimeService {
         }
         return distributionInfos;
     }
+
+    public void deleteById(int id){
+        timeRepository.delete(id);
+    }
 }

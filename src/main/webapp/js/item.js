@@ -102,6 +102,22 @@ function modify(id, content, project, tag, ele) {
         }
     }
 }
+function deleteTime(timeId) {
+    $("#time"+timeId).remove();
+    $.ajax({
+        url:"/time/delete/"+timeId,
+        type:"DELETE",
+        success:function () {
+            for (var i = 0; i < timeInfos.length; i++){
+                if (timeInfos[i].timeId == timeId){
+                    timeInfos.splice(i,1);
+                    break;
+                }
+            }
+        }
+    })
+
+}
 $(function () {
     var start = "/image/start.jpg";
     var stop = "/image/stop.jpg";
@@ -162,7 +178,7 @@ $(function () {
                     startDate = startDate.getMonth()+1+"-"+startDate.getDate()+" "+startDate.getHours()+":"+startDate.getMinutes()+":"+startDate.getSeconds();
                     endDate = new Date(timeInfos[i].endTime);
                     endDate = endDate.getMonth()+1+"-"+endDate.getDate()+" "+endDate.getHours()+":"+endDate.getMinutes()+":"+endDate.getSeconds();
-                    text=text+"<div class='time' ><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div> </div>"
+                    text=text+"<div class='time' id='time"+ timeInfos[i].timeId +"'><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div><div class='subtime' style='width: 10%'><button style='border: none;background-color: inherit;height: 100%;color:red' onclick='deleteTime(\""+timeInfos[i].timeId+"\")'>Delete</button></div></div>"
                 }
             }
             $(this).parent().parent().next().show();
@@ -362,7 +378,7 @@ function addTime(itemId, content, project, tag, length, timestamp) {
                                 startDate = startDate.getMonth()+1+"-"+startDate.getDate()+" "+startDate.getHours()+":"+startDate.getMinutes()+":"+startDate.getSeconds();
                                 endDate = new Date(timeInfos[i].endTime);
                                 endDate = endDate.getMonth()+1+"-"+endDate.getDate()+" "+endDate.getHours()+":"+endDate.getMinutes()+":"+endDate.getSeconds();
-                                text=text+"<div class='time' id='time'><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div><div class='subtime' style='width: 10%'><button style='border: none'>Delete</button>/div> </div>"
+                                text=text+"<div class='time' id='time"+ timeInfos[i].timeId +"'><div class='subtime'>"+startDate+"</div><div class='subtime'>"+endDate+"</div><div class='subtime'>"+getClockModel(timeInfos[i].length)+"</div><div class='subtime' style='width: 10%'><button style='border: none;background-color: inherit;height: 100%;color: red' onclick='deleteTime(\""+timeInfos[i].timeId+"\")'>Delete</button></div> </div>"
                             }
                         }
                         $(this).parent().parent().next().html(text);

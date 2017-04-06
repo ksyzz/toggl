@@ -1,4 +1,4 @@
-package java.org.faker;
+package org.faker;
 
 import org.faker.entity.Tag;
 import org.faker.service.TagService;

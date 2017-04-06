@@ -11,12 +11,6 @@
     <hibernate.version>5.1.0.Final</hibernate.version>
   </properties>
   <dependencies>
-    <!--<dependency>-->
-      <!--<groupId>junit</groupId>-->
-      <!--<artifactId>j</artifactId>-->
-      <!--<version>4.4</version>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
